@@ -40,7 +40,10 @@ public class FornecedorService {
 
     private void updateData(Fornecedor newObj, Fornecedor obj) {
         newObj.setEmailContato(obj.getEmailContato());
+//        newObj.setNomeFornecedor(obj.getNomeFornecedor());
+//        newObj.setNomeContato(obj.getNomeContato());
     }
+
 
 }
 

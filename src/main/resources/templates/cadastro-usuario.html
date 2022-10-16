@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Ficha de Cadastro</title>
     <link rel="stylesheet" th:href="@{/bootstrap-5.2.2-dist/css/bootstrap.min.css}">
     <script th:src="@{/jquery-3.6.1-dist/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
+
+
     <style></style>
 </head>
 <body>
@@ -18,14 +20,47 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <span th:text="${mensagem}"></span>
             </div>
+
             <form action="#" th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
+
+                <!--                <div class="row mb-3">-->
+                <!--                    <label class="col-sm-1 col-form-label">Id:</label>-->
+                <!--                    <div class="col-sm-5">-->
+                <!--                        <input class="form-control" type="text" th:field="*{id}"/>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-sm-5">-->
+                <!--                        &lt;!&ndash;                        <span class="mensagem" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
                 <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label">Nome:</label>
+                    <label class="col-sm-1 col-form-label">Email:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="text" th:field="*{id}">
+                        <input class="form-control" type="email" name="email" th:field="*{email}"/>
                     </div>
                     <div class="col-sm-5">
-                        <span class="mensagem" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label">Senha:</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="password" name="senha" autocomplete="off" th:field="*{senha}"
+                               minlength="4" maxlength="8"/>
+                        <!--                    </div>-->
+                        <!--                    <label class="Col-sm-2 col-form-label">Confirm:</label>-->
+                        <!--                    <div class="col-sm-2" id="">-->
+                        <!--                        <input type="password" class="form-control" id="confirmPassword" autocomplete="off"-->
+                        <!--                               th:field="*{senha}"/>-->
+
+
+                        <div class="col-sm-5">
+                            <!--                        <span class="mensagem" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></span>-->
+                        </div>
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Gravar"/>
                     </div>
                 </div>
             </form>

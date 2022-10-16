@@ -14,8 +14,12 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+
     @Autowired
     private UserRepository userRepo;
+    public void save(User user) {
+        this.userRepo.save(user);
+    }
 
     public List<User> findAll() {
         return userRepo.findAll();
@@ -46,9 +50,13 @@ public String addUser(Model model){
 
     private void updateData(User newObj, User obj) {
         newObj.setEmail(obj.getEmail());
+        newObj.setSenha(obj.getSenha());
+
     }
 
     public User fromDTO(UserDTO objDto) {
         return new User();
     }
+
+
 }

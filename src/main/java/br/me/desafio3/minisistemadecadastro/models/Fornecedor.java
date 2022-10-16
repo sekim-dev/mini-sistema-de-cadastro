@@ -1,6 +1,6 @@
 package br.me.desafio3.minisistemadecadastro.models;
 
-import com.mongodb.lang.NonNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,22 +15,21 @@ public class Fornecedor {
     private String emailContato;
     private boolean cnpjCpf;
     private String numeroDocumento;
-    private List<String> telefone;
-
+    private List<String> telefoneList;
     private List<Endereco> endereco;
 
-    public Fornecedor(Fornecedor x) {
+    public Fornecedor() {
     }
 
-    public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, boolean cnpjCpf, String numeroDocumento, List<String> telefone){ //}, Endereco endereco) {
+    public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, boolean cnpjCpf, String numeroDocumento, List<String> telefoneList){ //}, Endereco endereco) {
         this.id = id;
         this.nomeFornecedor = nomeFornecedor;
         this.nomeContato = nomeContato;
         this.emailContato =emailContato;
         this.cnpjCpf = cnpjCpf;
         this.numeroDocumento = numeroDocumento;
-        this.telefone = telefone;
-        //this.endereco = endereco;
+        this.telefoneList = telefoneList;
+        this.endereco = endereco;
     }
 
     public String getId(){
@@ -42,15 +41,12 @@ public class Fornecedor {
     public String getNomeFornecedor() {
         return nomeFornecedor;
     }
-
     public void setNomeFornecedor(String nomeFornecedor) {
         this.nomeFornecedor = nomeFornecedor;
     }
-
     public String getNomeContato() {
         return nomeContato;
     }
-
     public void setNomeContato(String nomeContato) {
         this.nomeContato = nomeContato;
     }
@@ -58,7 +54,6 @@ public class Fornecedor {
     public String getEmailContato() {
         return emailContato;
     }
-
     public void setEmailContato(String emailContato) {
         this.emailContato = emailContato;
     }
@@ -66,7 +61,6 @@ public class Fornecedor {
     public boolean isCnpjCpf() {
         return cnpjCpf;
     }
-
     public void setCnpjCpf(boolean cnpjCpf) {
         this.cnpjCpf = cnpjCpf;
     }
@@ -79,12 +73,12 @@ public class Fornecedor {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public List<String> getTelefone() {
-        return telefone;
+    public List<String> getTelefoneList() {
+        return telefoneList;
     }
 
-    public void setTelefone(List<String> telefone) {
-        this.telefone = telefone;
+    public void setTelefoneList(List<String> telefoneList) {
+        this.telefoneList = telefoneList;
     }
 
 //    public Endereco getEndereco() {

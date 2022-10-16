@@ -2,6 +2,9 @@ package br.me.desafio3.minisistemadecadastro.models;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.repository.query.Param;
+
+import java.net.PasswordAuthentication;
 
 public class Endereco {
     @Id
@@ -85,4 +88,6 @@ public String getCidade(){
 public void setCidade(){
         this.cidade = cidade;
 }
+
+
 }

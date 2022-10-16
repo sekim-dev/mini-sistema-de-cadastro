@@ -12,16 +12,19 @@ public class User implements Serializable {
     private String id;
     private String email;
     private String senha;
-    private String confirmacaoSenha;
+
 
     public User() {
     }
-    public User (String id, String email, String senha, String confirmacaoSenha) {
+    public User (String id, String email, String senha) {
         super();
         this.id = id;
         this.email = email;
         this.senha = senha;
-        this.confirmacaoSenha = confirmacaoSenha;
+    }
+    public User (String email, String senha) {
+        this.email = email;
+        this.senha = senha;
     }
 
     public String getId(){
@@ -39,15 +42,9 @@ public class User implements Serializable {
     public String getSenha(){
         return senha;
     }
-    public void setsenha(){
-        this.senha = senha;
+    public void setSenha(String senha){
+        this.senha = this.senha;
     }
-public String getconfirmacaoSenha (){
-        return confirmacaoSenha;
-}
-public void setConfirmacaoSenha (){
-        this.confirmacaoSenha = confirmacaoSenha;
-}
 
     @Override
     public boolean equals(Object o) {
@@ -64,6 +61,6 @@ public void setConfirmacaoSenha (){
 
     @Override
     public String toString(){
-        return "User [id=" + id + ",email=" + email + ", senha=" + senha + ", confirmacaoSenha=" + confirmacaoSenha + "]";
+        return "User [id=" + id + ",email=" + email + ", senha=" + senha + "]";
 }
 }

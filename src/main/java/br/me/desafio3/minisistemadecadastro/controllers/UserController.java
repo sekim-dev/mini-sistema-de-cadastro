@@ -1,23 +1,15 @@
 package br.me.desafio3.minisistemadecadastro.controllers;
 
-import br.me.desafio3.minisistemadecadastro.dto.UserDTO;
 import br.me.desafio3.minisistemadecadastro.models.User;
-import br.me.desafio3.minisistemadecadastro.repository.UserRepository;
 import br.me.desafio3.minisistemadecadastro.services.UserService;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/usuario")
@@ -32,10 +24,22 @@ public class UserController {
         return "/cadastro-usuario";
     }
 
-    @PostMapping("/salvar")
-    public ResponseEntity<String> addUser(User user) {
-        return ResponseEntity.ok().body("cadastro realizado com sucesso");
+        @PostMapping("/salvar")
+    public String salvarUsuario(User user, BindingResult result,
+                                 RedirectAttributes attributes) {
+//        if (result.hasErrors()) {
+//            return "/cadastro-usuario";
+//        }
+        userService.insert(user);
+        attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!" + user);
+        return "redirect:/usuario/novo";
+
     }
+
+//    @PostMapping("/salvar")
+//    public ResponseEntity<String> addUser(User user) {
+//        return ResponseEntity.ok().body("cadastro realizado com sucesso");
+//    }
 //
 //    @GetMapping("/novo")
 //    public String addUser(Model model) {
@@ -47,16 +51,7 @@ public class UserController {
 ////
 
 //
-//    @PostMapping("/salvar")
-//    public String salvarUsuario(User user, BindingResult result,
-//                                 RedirectAttributes attributes) {
-//        if (result.hasErrors()) {
-//            return "/cadastro-usuario";
-//        }
-//        userService.insert(user);
-//        attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
-//        return "redirect:/user/new";
-//    }
+
 //
 //
 
