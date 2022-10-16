@@ -27,14 +27,14 @@ public class User implements Serializable {
     public String getId(){
         return id;
     }
-    public void setId(){
+    public void setId(String id){
         this.id = id;
     }
     public String getEmail(){
         return email;
     }
-    public void setEmail(){
-        this.email = email;
+    public void setEmail(String email){
+        this.email = this.email;
     }
     public String getSenha(){
         return senha;

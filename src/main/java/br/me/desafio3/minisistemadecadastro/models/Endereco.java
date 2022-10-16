@@ -1,9 +1,10 @@
 package br.me.desafio3.minisistemadecadastro.models;
 
 
+import org.springframework.data.annotation.Id;
 
 public class Endereco {
-
+    @Id
     private String id;
     private String cep;
     private String lograedouro;

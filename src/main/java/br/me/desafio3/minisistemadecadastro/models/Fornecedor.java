@@ -1,20 +1,28 @@
 package br.me.desafio3.minisistemadecadastro.models;
 
-public class Fornecedor {
+import com.mongodb.lang.NonNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
+@Document(collection="fornecedor")
+public class Fornecedor {
+@Id
     private String id;
     private String nomeFornecedor;
     private String nomeContato;
     private String emailContato;
     private boolean cnpjCpf;
     private String numeroDocumento;
-    private String telefone;
-    private Endereco endereco;
+    private List<String> telefone;
 
-    public Fornecedor() {
+    private List<Endereco> endereco;
+
+    public Fornecedor(Fornecedor x) {
     }
 
-    public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, boolean cnpjCpf, String numeroDocumento, String telefone, Endereco endereco) {
+    public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, boolean cnpjCpf, String numeroDocumento, List<String> telefone){ //}, Endereco endereco) {
         this.id = id;
         this.nomeFornecedor = nomeFornecedor;
         this.nomeContato = nomeContato;
@@ -22,14 +30,14 @@ public class Fornecedor {
         this.cnpjCpf = cnpjCpf;
         this.numeroDocumento = numeroDocumento;
         this.telefone = telefone;
-        this.endereco = endereco;
+        //this.endereco = endereco;
     }
 
     public String getId(){
         return id;
     }
-    public void setId(){
-        this.id = id;
+    public void setId(String id){
+        this.id = this.id;
     }
     public String getNomeFornecedor() {
         return nomeFornecedor;
@@ -71,19 +79,21 @@ public class Fornecedor {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getTelefone() {
+    public List<String> getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(List<String> telefone) {
         this.telefone = telefone;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
+//    public Endereco getEndereco() {
+//        return endereco;
+//    }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+//    public void setEndereco(Endereco endereco) {
+//        this.endereco = endereco;
+//    }
+
+
 }

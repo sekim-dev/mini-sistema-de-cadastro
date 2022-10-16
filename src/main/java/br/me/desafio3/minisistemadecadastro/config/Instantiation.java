@@ -1,0 +1,47 @@
+package br.me.desafio3.minisistemadecadastro.config;
+
+import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
+import br.me.desafio3.minisistemadecadastro.models.User;
+import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
+import br.me.desafio3.minisistemadecadastro.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.thymeleaf.util.ListUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Configuration
+public class Instantiation implements CommandLineRunner {
+
+    @Autowired
+    private UserRepository userReposiroty;
+    @Autowired
+    private FornecedorRepository fornecedorRepository;
+
+    @Override
+    public void run(String... arg0) throws Exception {
+
+
+        userReposiroty.deleteAll();
+        fornecedorRepository.deleteAll();
+
+        User salo = new User(null, "salo@salo.com", "1111", "1111");
+        User amanda = new User(null, "amanda@amanda.com", "2222", "2222");
+        User hugo = new User(null, "hugo@hugo.com", "3333", "3333");
+
+        userReposiroty.saveAll(Arrays.asList(salo, amanda, hugo));
+
+        List<String> l1 = new ArrayList<>();
+
+		Fornecedor f1 = new Fornecedor(null, "fornecedor1", "contato1", "1email@email.com",true,"111111111", l1) ;
+		Fornecedor f2 = new Fornecedor(null, "fornecedor2", "contato2", "2email@email.com",true,"111111111",l1) ;
+		Fornecedor f3 = new Fornecedor(null, "fornecedor3", "contato3", "3email@email.com",true,"111111111",l1) ;
+
+		fornecedorRepository.saveAll(Arrays.asList(f1,f2,f3));
+//		userReposiroty.save(salo);
+    }
+
+}
