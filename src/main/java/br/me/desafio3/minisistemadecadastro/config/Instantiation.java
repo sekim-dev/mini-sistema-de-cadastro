@@ -40,7 +40,6 @@ public class Instantiation implements CommandLineRunner {
 		Fornecedor f3 = new Fornecedor(null, "fornecedor3", "contato3", "3email@email.com",true,"111111111",l1) ;
 
 		fornecedorRepository.saveAll(Arrays.asList(f1,f2,f3));
-//		usuarioReposiroty.save(salo);
     }
 
 }

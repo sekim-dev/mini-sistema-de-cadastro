@@ -17,7 +17,7 @@ public class Usuario {
     public Usuario() {
     }
     public Usuario(String id, String emailUsuario, String senha) {
-        super();
+//        super();
         this.id = id;
         this.emailUsuario = emailUsuario;
         this.senha = senha;
@@ -30,9 +30,7 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getEmailUsuario(){
-        return emailUsuario;
-    }
+    public String getEmailUsuario(){return emailUsuario;}
     public void setEmailUsuario(String emailUsuario){
         this.emailUsuario = this.emailUsuario;
     }
