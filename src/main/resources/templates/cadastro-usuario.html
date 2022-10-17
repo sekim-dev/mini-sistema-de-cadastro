@@ -36,7 +36,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Email:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="email" name="email" th:field="*{email}"/>
+                        <input class="form-control" type="email" th:field="*{emailUsuario}" required/>
                     </div>
                     <div class="col-sm-5">
                         <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
@@ -46,7 +46,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Senha:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="password" name="senha" autocomplete="off" th:field="*{senha}"
+                        <input class="form-control" type="text" name="senha" autocomplete="off" th:field="*{senha}"
                                minlength="4" maxlength="8"/>
                         <!--                    </div>-->
                         <!--                    <label class="Col-sm-2 col-form-label">Confirm:</label>-->

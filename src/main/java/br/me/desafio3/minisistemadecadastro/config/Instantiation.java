@@ -1,13 +1,12 @@
 package br.me.desafio3.minisistemadecadastro.config;
 
 import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
-import br.me.desafio3.minisistemadecadastro.models.User;
+import br.me.desafio3.minisistemadecadastro.models.Usuario;
 import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
-import br.me.desafio3.minisistemadecadastro.repository.UserRepository;
+import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.thymeleaf.util.ListUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import java.util.List;
 public class Instantiation implements CommandLineRunner {
 
     @Autowired
-    private UserRepository userReposiroty;
+    private UsuarioRepository usuarioReposiroty;
     @Autowired
     private FornecedorRepository fornecedorRepository;
 
@@ -25,14 +24,14 @@ public class Instantiation implements CommandLineRunner {
     public void run(String... arg0) throws Exception {
 
 
-        userReposiroty.deleteAll();
+        usuarioReposiroty.deleteAll();
         fornecedorRepository.deleteAll();
 
-        User salo = new User(null, "salo@salo.com", "1111");
-        User amanda = new User(null, "amanda@amanda.com", "2222");
-        User hugo = new User(null, "hugo@hugo.com", "3333");
+        Usuario salo = new Usuario(null, "salo@salo.com", "1111");
+        Usuario amanda = new Usuario(null, "amanda@amanda.com", "2222");
+        Usuario hugo = new Usuario(null, "hugo@hugo.com", "3333");
 
-        userReposiroty.saveAll(Arrays.asList(salo, amanda, hugo));
+        usuarioReposiroty.saveAll(Arrays.asList(salo, amanda, hugo));
 
         List<String> l1 = new ArrayList<>();
 
@@ -41,7 +40,7 @@ public class Instantiation implements CommandLineRunner {
 		Fornecedor f3 = new Fornecedor(null, "fornecedor3", "contato3", "3email@email.com",true,"111111111",l1) ;
 
 		fornecedorRepository.saveAll(Arrays.asList(f1,f2,f3));
-//		userReposiroty.save(salo);
+//		usuarioReposiroty.save(salo);
     }
 
 }

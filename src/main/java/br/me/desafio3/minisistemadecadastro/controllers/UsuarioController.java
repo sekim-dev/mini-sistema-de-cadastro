@@ -1,7 +1,7 @@
 package br.me.desafio3.minisistemadecadastro.controllers;
 
-import br.me.desafio3.minisistemadecadastro.models.User;
-import br.me.desafio3.minisistemadecadastro.services.UserService;
+import br.me.desafio3.minisistemadecadastro.models.Usuario;
+import br.me.desafio3.minisistemadecadastro.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,41 +13,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/usuario")
-public class UserController {
+public class UsuarioController {
 
     @Autowired
-    private UserService userService;
+    private UsuarioService usuarioService;
 
     @GetMapping("/novo")
     public String adicionarUsuario(Model model) {
-        model.addAttribute("usuario", new User());
+        model.addAttribute("usuario", new Usuario());
         return "/cadastro-usuario";
     }
 
         @PostMapping("/salvar")
-    public String salvarUsuario(User user, BindingResult result,
-                                 RedirectAttributes attributes) {
-//        if (result.hasErrors()) {
-//            return "/cadastro-usuario";
-//        }
-        userService.insert(user);
-        attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!" + user);
+    public String salvarUsuario(Usuario usuario, BindingResult result,
+                                RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "/cadastro-usuario";
+        }
+        usuarioService.insert(usuario);
+        attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!" + usuario);
         return "redirect:/usuario/novo";
 
     }
 
 //    @PostMapping("/salvar")
-//    public ResponseEntity<String> addUser(User user) {
+//    public ResponseEntity<String> addUsuario(Usuario usuario) {
 //        return ResponseEntity.ok().body("cadastro realizado com sucesso");
 //    }
 //
 //    @GetMapping("/novo")
-//    public String addUser(Model model) {
-//        model.addAttribute("usuario", new User());
+//    public String addUsuario(Model model) {
+//        model.addAttribute("usuario", new Usuario());
 //        return "/cadastro-usuario";
 //    }
 //    //        @Autowired
-////        private UserRepository usuarioRepository;
+////        private UsuarioRepository usuarioRepository;
 ////
 
 //
@@ -60,37 +60,37 @@ public class UserController {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<User> list = userService.findAll();
-        List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+    public ResponseEntity<List<UsuarioDTO>> findAll() {
+        List<Usuario> list = usuarioService.findAll();
+        List<UsuarioDTO> listDto = list.stream().map(x -> new UsuarioDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<UserDTO> findById(@PathVariable String id) {
-        User obj = userService.findById(id);
-        return ResponseEntity.ok().body(new UserDTO(obj));
+    public ResponseEntity<UsuarioDTO> findById(@PathVariable String id) {
+        Usuario obj = usuarioService.findById(id);
+        return ResponseEntity.ok().body(new UsuarioDTO(obj));
     }
 
     @RequestMapping(value = "/new") //(method=RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
-        User obj = userService.fromDTO(objDto);
-        obj = userService.insert(obj);
+    public ResponseEntity<Void> insert(@RequestBody UsuarioDTO objDto) {
+        Usuario obj = usuarioService.fromDTO(objDto);
+        obj = usuarioService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable String id) {
-        userService.delete(id);
+        usuarioService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
-        User obj = userService.fromDTO(objDto);
+    public ResponseEntity<Void> update(@RequestBody UsuarioDTO objDto, @PathVariable String id) {
+        Usuario obj = usuarioService.fromDTO(objDto);
         obj.setId(id);
-        obj = userService.update(obj);
+        obj = usuarioService.update(obj);
         return ResponseEntity.noContent().build();
     }*/
 

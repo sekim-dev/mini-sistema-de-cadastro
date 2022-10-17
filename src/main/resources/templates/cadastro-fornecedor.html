@@ -27,7 +27,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Nome do Fornecedor:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="string" th:field="*{nomeFornecedor}" required/>
+                        <input class="form-control" type="text" th:field="*{nomeFornecedor}" required/>
                     </div>
                     <div class="col-sm-5">
                         <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
@@ -37,7 +37,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Nome do Contato:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="string" autocomplete="off" th:field="*{nomeContato}"
+                        <input class="form-control" type="text" autocomplete="off" th:field="*{nomeContato}"
                                required minlength="4" maxlength="8"/>
                     </div>
                     <div>
@@ -68,9 +68,19 @@
                 </div>
 
                 <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label">Numero do Documento:</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" th:field="*{numeroDocumento}" required/>
+                    </div>
+                    <div class="col-sm-5">
+                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Telefone:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="string" th:field="*{telefoneList}" required/>
+                        <input class="form-control" type="text" th:field="*{telefoneList}" required/>
                     </div>
                     <div class="col-sm-5">
                         <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
