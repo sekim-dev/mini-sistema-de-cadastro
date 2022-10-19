@@ -1,6 +1,7 @@
 package br.me.desafio3.minisistemadecadastro.controllers;
 
 import br.me.desafio3.minisistemadecadastro.models.Usuario;
+import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
 import br.me.desafio3.minisistemadecadastro.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioServiceImpl usuarioServiceImpl;
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/novo")
     public String adicionarUsuario(Model model) {
@@ -24,15 +25,15 @@ public class UsuarioController {
     }
 
         @PostMapping("/salvar")
-    public String salvarUsuario(Usuario usuario, RedirectAttributes attributes) {
+    public String salvarUsuario(Usuario usuario, Model model, RedirectAttributes attributes) {
 
-            Usuario usr = usuarioServiceImpl.buscarUsuarioPorLogin(usuario.getLogin());
+            Usuario usr = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
             if (usr != null) {
-                model.addAttribute("loginExiste", "Login já existe cadastrado");
-                return "/publica-criar-usuario";
+                model.addAttribute("emailExiste", "Email já existe cadastrado");
+                return "/cadastro-usuario";
             }
 
-        usuarioServiceImpl.insert(usuario);
+        usuarioRepository.insert(usuario);
         attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
         return "redirect:/usuario/novo";
 

@@ -14,12 +14,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String id, String emailUsuario, String senha, String login) {
+    public Usuario(String id, String emailUsuario, String senha) {
 //        super();
         this.id = id;
         this.emailUsuario = emailUsuario;
         this.senha = senha;
-        this.login = login;
+
     }
 
     public String getId() {
@@ -46,9 +46,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getLogin() {
-        return login;
-    }
 
     //    @Override
 //    public boolean equals(Object o) {

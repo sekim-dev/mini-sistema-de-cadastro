@@ -13,4 +13,9 @@ public class IndexController {
         model.addAttribute("msnBemVindo", "Bem-vindo ao mini sistema de cadastro");
         return "/cadastro-index";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }

@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
+public class UsuarioServiceImpl{
 
     @Autowired
     private UsuarioRepository usuarioRepo;
-
-    @Autowired
-    private BCryptPasswordEncoder criptografia;
+//
+//    @Autowired
+//    private BCryptPasswordEncoder criptografia;
 
 //    public void save(Usuario usuario) {
 //        this.usuarioRepo.save(usuario);

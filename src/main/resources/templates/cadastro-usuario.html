@@ -41,6 +41,7 @@
                         <input class="form-control" type="email" th:field="*{emailUsuario}" required/>
                     </div>
                     <div class="col-sm-5">
+                        <span class="mensagem" th:it="${emailExiste}" th:text="${emailExiste}"></span>
                     </div>
                 </div>
 
@@ -65,7 +66,7 @@
                     <div>
                         <br>
                         <input class="btn btn-primary" type="submit" value="Gravar"/>
-                        <a class="btn btn-primary" th:href="@{/home}"> Voltar </a>
+                        <a class="btn btn-primary" th:href="@{/}"> Voltar </a>
                     </div>
                 </div>
 

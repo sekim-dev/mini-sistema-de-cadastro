@@ -1,9 +1,55 @@
 package br.me.desafio3.minisistemadecadastro.seguraca;
 
+import br.me.desafio3.minisistemadecadastro.models.Usuario;
+import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class ConfigSeguranca {
+public class ConfigSeguranca extends WebSecurityConfigurerAdapter{
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+//    @Autowired
+//    private LoginSucesso loginSucesso;
+
+    @Bean
+    public BCryptPasswordEncoder gerarCriptografia() {
+        BCryptPasswordEncoder criptografia = new BCryptPasswordEncoder();
+        return criptografia;
+    }
+
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        DetalheUsuarioServico detalheDoUsuario = new DetalheUsuarioServico(usuarioRepository);
+        return detalheDoUsuario;
+    }
+
+@Override
+    protected void configure(HttpSecurity http) throws Exception{
+http.authorizeHttpRequests()
+        .antMatchers("/fornecedor/novo", "/usuario/novo").authenticated()
+        .anyRequest().permitAll()
+        .and()
+        .exceptionHandling().accessDeniedPage("/auth/auth-acesso-negado")
+        .and()
+        .formLogin()
+        .loginPage("/login").permitAll()
+        .and()
+        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/").permitAll();
+
+}
+
+
+
 }
