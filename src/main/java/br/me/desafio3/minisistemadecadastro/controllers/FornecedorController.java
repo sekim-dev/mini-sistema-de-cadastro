@@ -1,6 +1,7 @@
 package br.me.desafio3.minisistemadecadastro.controllers;
 
 import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
+import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
 import br.me.desafio3.minisistemadecadastro.services.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -17,6 +19,8 @@ public class FornecedorController {
 
         @Autowired
         private FornecedorService fornecedorService;
+        @Autowired
+        private FornecedorRepository fornecedorRepository;
 
         @GetMapping("/novo")
         public String adicionarFornecedor(Model model) {
@@ -26,16 +30,22 @@ public class FornecedorController {
 
 
         @PostMapping("/salvar")
-        public String salvarFornecedor(Fornecedor fornecedor, BindingResult result,
-                                    RedirectAttributes attributes) {
-            if (result.hasErrors()) {
-                return "/cadastro-fornecedor";
-            }
-            fornecedorService.insert(fornecedor);
+        public String salvarFornecedor(Fornecedor fornecedor, RedirectAttributes attributes) {
+                  fornecedorService.insert(fornecedor);
             attributes.addFlashAttribute("mensagem", "Fornecedor salvo com sucesso!");
             return "redirect:/fornecedor/novo";
         }
 
+        @RequestMapping("/lista")
+    public  String lista(Model model){
+            model.addAttribute("lista", fornecedorRepository);
+            return "/auth/lista/lista";
+        }
+//    @RequestMapping(value = "fornecedor", params = {"addRepresentante"})
+//    public ModelAndView addRepresentante(Fornecedor fornecedor) {
+//        ModelAndView mv = new ModelAndView("add-fornecedor-form");
+//        fornecedor.getRepresentante().add(new Representante());
+//        return mv;
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

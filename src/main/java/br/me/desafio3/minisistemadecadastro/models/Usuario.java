@@ -3,46 +3,54 @@ package br.me.desafio3.minisistemadecadastro.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-@Document(collection="usuario")
+@Document(collection = "usuario")
 public class Usuario {
-@Id
+    @Id
     private String id;
     private String emailUsuario;
     private String senha;
-
+    private String login;
 
     public Usuario() {
     }
-    public Usuario(String id, String emailUsuario, String senha) {
+
+    public Usuario(String id, String emailUsuario, String senha, String login) {
 //        super();
         this.id = id;
         this.emailUsuario = emailUsuario;
         this.senha = senha;
+        this.login = login;
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
-    public void setId(String id){
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getEmailUsuario(){return emailUsuario;}
-    public void setEmailUsuario(String emailUsuario){
-        this.emailUsuario = this.emailUsuario;
+    public String getEmailUsuario() {
+        return emailUsuario;
     }
 
-    public String getSenha(){
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
+
+    public String getSenha() {
         return senha;
     }
-    public void setSenha(String senha){
-        this.senha = this.senha;
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-//    @Override
+    public String getLogin() {
+        return login;
+    }
+
+    //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
 //        if (!(o instanceof Usuario)) return false;

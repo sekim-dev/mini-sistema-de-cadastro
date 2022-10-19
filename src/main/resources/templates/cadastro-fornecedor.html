@@ -7,17 +7,27 @@
     <script th:src="@{/jquery-3.6.1-dist/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
 
+    <script>
+        function listaTabela() {
+            let tbody = document.getElementById('tbody');
+
+            for (let i = 0; i < this.telefoneLista.length; i++) {
+                let tr = tbody.insertRow();
+                let td_tel = tr.insertCell()
+            }
+        }
+    </script>
+    <!--    </script>-->
 
     <style></style>
 </head>
 <body>
-
+<div th:insert="fragments/pagina-nav :: fragmentoNav"></div>
 <div class="container">
     <div class="row">
         <div class="col">
             <h2>Cadastro de fornecedor</h2>
             <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <span th:text="${mensagem}"></span>
             </div>
 
@@ -30,20 +40,20 @@
                         <input class="form-control" type="text" th:field="*{nomeFornecedor}" required/>
                     </div>
                     <div class="col-sm-5">
-                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
                     </div>
+
                 </div>
 
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Nome do Contato:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text" autocomplete="off" th:field="*{nomeContato}"
+                        <input class="form-control" type="text" th:field="*{nomeContato}"
                                required minlength="4" maxlength="8"/>
                     </div>
                     <div>
                         <div class="col-sm-5">
-                            <!--                        <span class="mensagem" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></span>-->
                         </div>
+
                     </div>
                 </div>
 
@@ -53,57 +63,239 @@
                         <input class="form-control" type="email" th:field="*{emailContato}" required/>
                     </div>
                     <div class="col-sm-5">
-                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="field col-lg-6">
+                        <label class="col-sm-5 col-form-label">Tipo do documento</label>
+                        <div class="provider-type ts-18-medium ts-dark-gray">
+                            <input type="radio" id="cnpj" th:field="*{cnpjCpf}" value="cnpj">
+                            <label>CNPJ</label><br>
+                            <input type="radio" id="cpf" th:field="*{cnpjCpf}" value="cpf">
+                            <label>CPF</label>
+
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label">CNPJ/CPF:</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" type="checkbox" th:field="*{cnpjCpf}" required/>
-                    </div>
-                    <div class="col-sm-5">
-                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
-                    </div>
-                </div>
 
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Numero do Documento:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="text" th:field="*{numeroDocumento}" required/>
+                        <input class="form-control" type="text" id="documento" th:field="*{numeroDocumento}" required/>
                     </div>
                     <div class="col-sm-5">
-                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
                     </div>
+
                 </div>
+
+
+                <br>
+                <!--                <div>-->
+                <!--                    <label class="col-sm-1 col-form-label">Telefone:</label>-->
+                <!--                    <div>-->
+                <!--                        <input class="ts-14-medium phone-input" type="text" th:fiekd="*{telefoneLista}"-->
+                <!--                               placeholder="(00) 00000-0000">-->
+                <!--                    </div>-->
+
+                <!--                    <div>-->
+                <!--                        <button class="btn-phone ts-18-medium ts-white" type="button">-->
+                <!--                            Adicionar telefone-->
+                <!--                        </button>-->
+                <!--                        <button class="btn-phone ts-18-medium ts-white" type="button">-->
+                <!--                            Adicionar telefone-->
+                <!--                        </button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div>
+                    <input class="ts-14-medium phone-input" id="first-number" type="text"
+                           th:field="*{telefoneLista}" placeholder="(00) 00000-0000"/>
+                </div>
+
+                <button class="btn-phone ts-18-medium ts-white" id="add-number" type="button">
+                    Adicionar telefone
+                </button>
+
+
+                <table class="field col-lg-6">
+                    <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <br>
+
+                <fieldset>
+                    <h3>Endereço</h3>
+
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Cep:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.cep}" required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Logradouro:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.lograedouro}"
+                                   required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Numero:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.numero}" required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Complemento:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.complemento}"
+                                   required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Bairro:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.bairro}" required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Cidade:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.cidade}" required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label">Estado:</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" type="text" th:field="*{endereco.estado}" required/>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+
+                    </div>
+                </fieldset>
 
                 <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label">Telefone:</label>
+                    <label class="col-sm-1 col-form-label">Descrição:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="text" th:field="*{telefoneList}" required/>
+                        <input class="form-control" type="text" th:field="*{descricao}" required/>
                     </div>
                     <div class="col-sm-5">
-                        <!--                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
                     </div>
+
                 </div>
 
-
-<!--                <div class="row mb-3">-->
-<!--                    <label class="col-sm-1 col-form-label">Endereco:</label>-->
-<!--                    <div class="col-sm-5">-->
-<!--                        <input class="form-control" type="email" th:field="*{endereco}" required/>-->
-<!--                    </div>-->
-<!--                    <div class="col-sm-5">-->
-<!--                        &lt;!&ndash;                        <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-
+                <div>
                     <input class="btn btn-primary" type="submit" value="Gravar"/>
-
-
+                    <a class="btn btn-primary" th:href="@{/home}"> Voltar </a>
+                </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    window.document.addEventListener('DOMContentLoaded', init, false);
+
+    function init() {
+        addNumberField()
+        radioChange()
+    };
+
+    function getParent(inputNode) {
+        return inputNode.parentElement;
+    }
+
+    function createInputNumber(name) {
+        const newInput = document.createElement('input');
+        newInput.className = 'ts-14-medium phone-input';
+        newInput.placeholder = '(00) 00000-0000';
+        newInput.type = 'text';
+        newInput.name = name;
+        return newInput;
+    }
+
+    function addInputHelper(node, input) {
+        getParent(node).appendChild(input);
+    }
+
+    function readNumberFromLastInput(firstInputNode) {
+        const parent = getParent(firstInputNode);
+        const lastChild = parent.lastElementChild;
+        const getNumber = lastChild.name.match(/\[(.*)\]/i);
+        if (!getNumber) {
+            return [lastChild.name, -1];
+        }
+        const getName = lastChild.name.match(/(.*)\[.*/i);
+        return [getName[1], getNumber[1]];
+    }
+
+    function addNumberField() {
+        const btnAddNumber = document.getElementById('add-number');
+        const inputNumber = document.getElementById('first-number');
+        btnAddNumber.addEventListener('click', () => {
+            const result = readNumberFromLastInput(inputNumber);
+            if (result[1] === -1) {
+                inputNumber.name = result[0] + "[0]";
+                const newInputNode = createInputNumber(result[0] + "[1]");
+                addInputHelper(inputNumber, newInputNode);
+                return;
+            }
+            const newNumber = (parseInt(result[1]) + 1);
+            const newInputNode = createInputNumber(result[0] + "[" + newNumber + "]");
+            addInputHelper(inputNumber, newInputNode);
+        });
+    }
+
+    function radioChange() {
+        const radioCnpj = document.getElementById('cnpj');
+        const radioCpf = document.getElementById('cpf');
+        const documento = document.getElementById('documento');
+        radioCnpj.addEventListener('change', () =>{
+           documento.placeholder = '00.000.000/0000-00'
+        });
+        radioCpf.addEventListener('change', () => {
+            documento.placeholder = '000.000.000-00'
+        });
+
+
+    }
+</script>
 </body>
 </html>

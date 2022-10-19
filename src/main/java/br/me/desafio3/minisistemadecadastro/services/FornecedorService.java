@@ -1,5 +1,6 @@
 package br.me.desafio3.minisistemadecadastro.services;
 
+import br.me.desafio3.minisistemadecadastro.models.Endereco;
 import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
 import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
 import br.me.desafio3.minisistemadecadastro.services.exception.ObjectNotFoundException;
@@ -24,8 +25,12 @@ public class FornecedorService {
     }
 
     public Fornecedor insert(Fornecedor obj) {
-        return fornecedorRepo.insert(obj);
+              return fornecedorRepo.insert(obj);
     }
+
+//    public listaTabela(){
+//        var tbody =
+//    }
 
     public void delete(String id) {
         findById(id);
@@ -40,9 +45,9 @@ public class FornecedorService {
 
     private void updateData(Fornecedor newObj, Fornecedor obj) {
         newObj.setEmailContato(obj.getEmailContato());
-//        newObj.setNomeFornecedor(obj.getNomeFornecedor());
-//        newObj.setNomeContato(obj.getNomeContato());
     }
+
+
 
 
 }

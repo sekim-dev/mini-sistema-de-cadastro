@@ -2,9 +2,6 @@ package br.me.desafio3.minisistemadecadastro.models;
 
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.repository.query.Param;
-
-import java.net.PasswordAuthentication;
 
 public class Endereco {
     @Id
@@ -35,7 +32,7 @@ public class Endereco {
         return id;
     }
 
-    public void setId() {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -43,7 +40,7 @@ public class Endereco {
         return cep;
     }
 
-    public void setCep() {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -51,7 +48,7 @@ public class Endereco {
         return lograedouro;
     }
 
-    public void setLograedouro() {
+    public void setLograedouro(String lograedouro) {
         this.lograedouro = lograedouro;
     }
 
@@ -59,7 +56,7 @@ public class Endereco {
         return numero;
     }
 
-    public void setNumero() {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -67,27 +64,33 @@ public class Endereco {
         return complemento;
     }
 
-    public void setComplemento() {
+    public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-public String getBairro(){
-        return complemento;
-}
-public void setBairro(){
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
         this.bairro = bairro;
-}
-public String getEstado(){
-        return estado;
-}
-public void setEstado(){
-        this.estado = estado;
-}
-public String getCidade(){
+    }
+
+    public String getCidade() {
         return cidade;
-}
-public void setCidade(){
+    }
+
+    public void setCidade(String cidade) {
         this.cidade = cidade;
-}
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
 
 }

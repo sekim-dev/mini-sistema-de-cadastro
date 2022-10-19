@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String index(Model model){
         model.addAttribute("msnBemVindo", "Bem-vindo ao mini sistema de cadastro");
         return "/cadastro-index";

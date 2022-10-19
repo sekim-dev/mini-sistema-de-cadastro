@@ -4,7 +4,9 @@ package br.me.desafio3.minisistemadecadastro.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Document(collection="fornecedor")
 public class Fornecedor {
@@ -13,30 +15,32 @@ public class Fornecedor {
     private String nomeFornecedor;
     private String nomeContato;
     private String emailContato;
-    private boolean cnpjCpf;
-    private String numeroDocumento;
-    private List<String> telefoneList;
-    private List<Endereco> endereco;
 
+    private String cnpjCpf;
+    private String numeroDocumento;
+    private List<String> telefoneLista = new ArrayList<>();
+    private Endereco endereco;
+private String descricao;
     public Fornecedor() {
     }
 
-    public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, boolean cnpjCpf, String numeroDocumento, List<String> telefoneList){ //}, Endereco endereco) {
+    public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, String cnpjCpf, String numeroDocumento, List<String> telefoneLista, Endereco endereco, String descricao) {
         this.id = id;
         this.nomeFornecedor = nomeFornecedor;
         this.nomeContato = nomeContato;
         this.emailContato =emailContato;
         this.cnpjCpf = cnpjCpf;
         this.numeroDocumento = numeroDocumento;
-        this.telefoneList = telefoneList;
+        this.telefoneLista = telefoneLista;
         this.endereco = endereco;
+        this.descricao = descricao;
     }
 
     public String getId(){
         return id;
     }
     public void setId(String id){
-        this.id = this.id;
+        this.id = id;
     }
     public String getNomeFornecedor() {
         return nomeFornecedor;
@@ -58,10 +62,10 @@ public class Fornecedor {
         this.emailContato = emailContato;
     }
 
-    public boolean isCnpjCpf() {
+    public String getCnpjCpf() {
         return cnpjCpf;
     }
-    public void setCnpjCpf(boolean cnpjCpf) {
+    public void setCnpjCpf(String cnpjCpf) {
         this.cnpjCpf = cnpjCpf;
     }
 
@@ -73,21 +77,37 @@ public class Fornecedor {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public List<String> getTelefoneList() {
-        return telefoneList;
+    public List<String> getTelefoneLista() {
+        return telefoneLista;
+    }
+    public void setTelefoneLista(List<String> telefoneLista) {
+        this.telefoneLista = telefoneLista;
     }
 
-    public void setTelefoneList(List<String> telefoneList) {
-        this.telefoneList = telefoneList;
+    public Endereco getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-//    public Endereco getEndereco() {
-//        return endereco;
-//    }
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-//    public void setEndereco(Endereco endereco) {
-//        this.endereco = endereco;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fornecedor)) return false;
+        Fornecedor that = (Fornecedor) o;
+        return Objects.equals(getId(), that.getId());
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
