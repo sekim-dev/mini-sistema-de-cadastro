@@ -4,22 +4,6 @@
     <meta charset="UTF-8">
     <title>Ficha de Cadastro</title>
     <link rel="stylesheet" th:href="@{/bootstrap-5.2.2-dist/css/bootstrap.min.css}">
-    <script th:src="@{/jquery-3.6.1-dist/jquery-3.6.1.min.js}"></script>
-    <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
-
-    <script>
-        function confereSenha() {
-            const senha = document.querySelector('input[name=senha]');
-            const confirma = document.querySelector('input[name=confirma]');
-
-            if (confirma.value === senha.value) {
-                confirma.setCustomValidity('');
-            } else {
-                confirma.setCustomValidity('As senhas não conferem')
-            }
-        }
-    </script>
-
 
     <style></style>
 </head>
@@ -74,5 +58,22 @@
         </div>
     </div>
 </div>
+
+ <script th:src="@{/jquery-3.6.1-dist/jquery-3.6.1.min.js}"></script>
+ <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
+
+ <script>
+        function confereSenha() {
+            const senha = document.querySelector('input[name=senha]');
+            const confirma = document.querySelector('input[name=confirma]');
+
+            if (confirma.value === senha.value) {
+                confirma.setCustomValidity('');
+            } else {
+                confirma.setCustomValidity('As senhas não conferem')
+            }
+        }
+    </script>
+
 </body>
 </html>

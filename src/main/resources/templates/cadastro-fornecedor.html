@@ -4,20 +4,6 @@
     <meta charset="UTF-8">
     <title>Ficha de Cadastro</title>
     <link rel="stylesheet" th:href="@{/bootstrap-5.2.2-dist/css/bootstrap.min.css}">
-    <script th:src="@{/jquery-3.6.1-dist/jquery-3.6.1.min.js}"></script>
-    <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
-
-    <script>
-        function listaTabela() {
-            let tbody = document.getElementById('tbody');
-
-            for (let i = 0; i < this.telefoneLista.length; i++) {
-                let tr = tbody.insertRow();
-                let td_tel = tr.insertCell()
-            }
-        }
-    </script>
-    <!--    </script>-->
 
     <style></style>
 </head>
@@ -91,26 +77,8 @@
 
                 </div>
 
-
-                <br>
-                <!--                <div>-->
-                <!--                    <label class="col-sm-1 col-form-label">Telefone:</label>-->
-                <!--                    <div>-->
-                <!--                        <input class="ts-14-medium phone-input" type="text" th:fiekd="*{telefoneLista}"-->
-                <!--                               placeholder="(00) 00000-0000">-->
-                <!--                    </div>-->
-
-                <!--                    <div>-->
-                <!--                        <button class="btn-phone ts-18-medium ts-white" type="button">-->
-                <!--                            Adicionar telefone-->
-                <!--                        </button>-->
-                <!--                        <button class="btn-phone ts-18-medium ts-white" type="button">-->
-                <!--                            Adicionar telefone-->
-                <!--                        </button>-->
-                <!--                    </div>-->
-                <!--                </div>-->
                 <div>
-                    <input class="ts-14-medium phone-input" id="first-number" type="text"
+                    <input class="ts-14-medium phone-input" maxlength="12" id="first-number" type="text"
                            th:field="*{telefoneLista}" placeholder="(00) 00000-0000"/>
                 </div>
 
@@ -142,7 +110,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label">Cep:</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" th:field="*{endereco.cep}" required/>
+                            <input class="form-control" id="cep" type="text" maxlength="9" th:field="*{endereco.cep}" required/>
                         </div>
                         <div class="col-sm-5">
                         </div>
@@ -152,7 +120,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label">Logradouro:</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" th:field="*{endereco.lograedouro}"
+                            <input class="form-control" id="logradouro" name="logradouro" type="text" th:field="*{endereco.logradouro}"
                                    required/>
                         </div>
                         <div class="col-sm-5">
@@ -173,7 +141,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label">Complemento:</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" th:field="*{endereco.complemento}"
+                            <input class="form-control"  type="text" th:field="*{endereco.complemento}"
                                    required/>
                         </div>
                         <div class="col-sm-5">
@@ -184,7 +152,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label">Bairro:</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" th:field="*{endereco.bairro}" required/>
+                            <input class="form-control" name="bairro" id="bairro" type="text" th:field="*{endereco.bairro}" required/>
                         </div>
                         <div class="col-sm-5">
                         </div>
@@ -194,7 +162,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label">Cidade:</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" th:field="*{endereco.cidade}" required/>
+                            <input class="form-control" name="cidade" id="cidade" type="text" th:field="*{endereco.cidade}" required/>
                         </div>
                         <div class="col-sm-5">
                         </div>
@@ -204,7 +172,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label">Estado:</label>
                         <div class="col-sm-5">
-                            <input class="form-control" type="text" th:field="*{endereco.estado}" required/>
+                            <input class="form-control" name="estado" id="estado" type="text" th:field="*{endereco.estado}"  required/>
                         </div>
                         <div class="col-sm-5">
                         </div>
@@ -230,13 +198,23 @@
         </div>
     </div>
 </div>
-<script>
-    window.document.addEventListener('DOMContentLoaded', init, false);
 
-    function init() {
+
+<script th:src="@{/jquery-3.6.1.min/jquery-3.6.1.min.js}"></script>
+<script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+
+
+      $("#cep").mask('00000-000', {reverse: true});
+      $("#first-number").mask('00 00000-0000', {reverse: true});
+
         addNumberField()
         radioChange()
-    };
 
     function getParent(inputNode) {
         return inputNode.parentElement;
@@ -247,6 +225,9 @@
         newInput.className = 'ts-14-medium phone-input';
         newInput.placeholder = '(00) 00000-0000';
         newInput.type = 'text';
+
+        newInput.id = 'first-number';
+        newInput.maxlength = "12";
         newInput.name = name;
         return newInput;
     }
@@ -289,13 +270,108 @@
         const documento = document.getElementById('documento');
         radioCnpj.addEventListener('change', () =>{
            documento.placeholder = '00.000.000/0000-00'
+           $("#documento").mask("99.999.999/9999-99");
+
         });
         radioCpf.addEventListener('change', () => {
-            documento.placeholder = '000.000.000-00'
+            documento.placeholder = '000.000.000-00';
+            $("#documento").mask("999.999.999-99");
         });
 
-
     }
+
+
+<!--    $("#documento").keydown(function(){-->
+<!--    try {-->
+<!--    	$("#documento").unmask();-->
+<!--    } catch (e) {}-->
+
+<!--    var tamanho = $("#documento").val().length;-->
+
+<!--    if(tamanho < 11){-->
+<!--        $("#documento").mask("999.999.999-99");-->
+<!--    } else if(tamanho >= 11){-->
+<!--        $("#documento").mask("99.999.999/9999-99");-->
+<!--    }-->
+
+<!--    // ajustando foco-->
+<!--    var elem = this;-->
+<!--    setTimeout(function(){-->
+<!--    	// mudo a posição do seletor-->
+<!--    	elem.selectionStart = elem.selectionEnd = 10000;-->
+<!--    }, 0);-->
+<!--    // reaplico o valor para mudar o foco-->
+<!--    var currentValue = $(this).val();-->
+<!--    $(this).val('');-->
+<!--    $(this).val(currentValue);-->
+<!--});-->
+
+
+
+
+      function clean_address_form() {
+        // Clean Address form.
+        $("#logradouro").val("");
+        $("#bairro").val("");
+        $("#cidade").val("");
+        $("#estado").val("");
+      }
+
+      //When Cep field loses focus.
+      $("#cep").blur(function() {
+
+        //Create "cep" variable with digits only.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Checks if a cep was informed.
+        if (cep != "") {
+
+          //Validate cep.
+          var validacep = /^[0-9]{8}$/;
+
+          //Validate cep format
+          if(validacep.test(cep)) {
+
+            //Fill in the fields with "..." while querying webservice.
+            $("#logradouro").val("...");
+            $("#bairro").val("...");
+            $("#cidade").val("...");
+            $("#estado").val("...");
+
+            //Search the informed cep in viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(data) {
+
+              if (!("erro" in data)) {
+                //Update fields with returned data.
+                $("#logradouro").val(data.logradouro);
+                $("#bairro").val(data.bairro);
+                $("#cidade").val(data.localidade);
+                $("#estado").val(data.uf);
+              } //end if.
+              else {
+                //searched cep was not found.
+                clean_address_form();
+                alert("CEP não encontrado.");
+              }
+            });
+          } //end if.
+          else {
+            //Invalid cep.
+            clean_address_form();
+            alert("Formato de CEP inválido.");
+          }
+        } //end if.
+        else {
+          //cep not informed, clean form.
+          clean_address_form();
+        }
+      });
+    });
+
+
+
+
+
 </script>
 </body>
 </html>

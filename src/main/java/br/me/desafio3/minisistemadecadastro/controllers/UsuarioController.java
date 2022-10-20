@@ -2,8 +2,10 @@ package br.me.desafio3.minisistemadecadastro.controllers;
 
 import br.me.desafio3.minisistemadecadastro.models.Usuario;
 import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
-import br.me.desafio3.minisistemadecadastro.services.UsuarioServiceImpl;
+//import br.me.desafio3.minisistemadecadastro.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +14,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping(value="/usuario")
+@RequestMapping(value = "/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder criptografia;
+
+
+    @GetMapping("/index")
+    public String index(@CurrentSecurityContext(expression = "authentication.emailUsuario")
+                        String login) {
+        Usuario usuario = usuarioRepository.findByEmailUsuario(login);
+        String redirectURL = "/cadastro-usuario";
+        return redirectURL;
+    }
 
     @GetMapping("/novo")
     public String adicionarUsuario(Model model) {
@@ -24,21 +38,22 @@ public class UsuarioController {
         return "/cadastro-usuario";
     }
 
-        @PostMapping("/salvar")
+    @PostMapping("/salvar")
     public String salvarUsuario(Usuario usuario, Model model, RedirectAttributes attributes) {
 
-            Usuario usr = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
-            if (usr != null) {
-                model.addAttribute("emailExiste", "Email já existe cadastrado");
-                return "/cadastro-usuario";
-            }
+        Usuario usr = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
+        if (usr != null) {
+            model.addAttribute("emailExiste", "Email já existe cadastrado");
+            return "/cadastro-usuario";
+        }
+        String senhaCriptografia = criptografia.encode(usuario.getSenha());
+        usuario.setSenha(senhaCriptografia);
 
         usuarioRepository.insert(usuario);
         attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
         return "redirect:/usuario/novo";
 
     }
-
 
 
 //    @PostMapping("/salvar")

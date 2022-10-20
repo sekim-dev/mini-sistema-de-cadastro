@@ -12,10 +12,6 @@ public class MiniSistemaDeCadastroApplication{
         SpringApplication.run(MiniSistemaDeCadastroApplication.class, args);
     }
 
-//@Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCrypt
-//}
 
 }
 

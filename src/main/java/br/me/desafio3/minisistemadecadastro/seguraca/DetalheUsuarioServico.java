@@ -25,6 +25,9 @@ public class DetalheUsuarioServico implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByEmailUsuario(username);
 
         if(usuario != null) {
+
+//            User user = new User(usuario.getEmailUsuario(), usuario.getSenha());
+//            return user;
             DetalheUsuario detalheUsuario = new DetalheUsuario(usuario);
             return detalheUsuario;
         } else {
