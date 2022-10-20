@@ -28,10 +28,6 @@ public class FornecedorService {
               return fornecedorRepo.insert(obj);
     }
 
-//    public listaTabela(){
-//        var tbody =
-//    }
-
     public void delete(String id) {
         findById(id);
         fornecedorRepo.deleteById(id);
