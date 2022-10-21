@@ -38,16 +38,20 @@ public class ConfigSeguranca extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .antMatchers("/fornecedor/novo").permitAll() //.authenticated()
+                .antMatchers("/fornecedor/novo").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/auth/auth-acesso-negado")
                 .and()
                 .formLogin().successHandler(loginSucesso)
                 .loginPage("/login").permitAll()
+                .usernameParameter("emailUsuario")
+                .passwordParameter("senha")
+                .defaultSuccessUrl("/fornecedor/novo")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").permitAll();
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package br.me.desafio3.minisistemadecadastro.seguraca;
 
+import br.me.desafio3.minisistemadecadastro.models.Usuario;
 import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,10 +15,14 @@ import java.io.IOException;
 @Component
 public class LoginSucesso extends SavedRequestAwareAuthenticationSuccessHandler {
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
-
+        String emailUsuario = authentication.getName();
+        Usuario usuario = usuarioRepository.findByEmailUsuario(emailUsuario);
         String redirectURL = "/usuario/index";
         response.sendRedirect(redirectURL);
     }

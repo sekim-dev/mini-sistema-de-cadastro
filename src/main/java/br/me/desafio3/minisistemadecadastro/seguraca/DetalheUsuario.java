@@ -52,12 +52,12 @@ public class DetalheUsuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
-    public String getEmailUsuario() {
-        return usuario.getEmailUsuario();
-    }
+//    public String getEmailUsuario() {
+//        return usuario.getEmailUsuario();
+//    }
 
 }
 

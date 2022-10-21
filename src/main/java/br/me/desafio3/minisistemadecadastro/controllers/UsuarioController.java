@@ -2,7 +2,7 @@ package br.me.desafio3.minisistemadecadastro.controllers;
 
 import br.me.desafio3.minisistemadecadastro.models.Usuario;
 import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
-//import br.me.desafio3.minisistemadecadastro.services.UsuarioServiceImpl;
+import br.me.desafio3.minisistemadecadastro.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +19,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private BCryptPasswordEncoder criptografia;
@@ -28,6 +30,7 @@ public class UsuarioController {
     public String index(@CurrentSecurityContext(expression = "authentication.emailUsuario")
                         String login) {
         Usuario usuario = usuarioRepository.findByEmailUsuario(login);
+
         String redirectURL = "/cadastro-usuario";
         return redirectURL;
     }
