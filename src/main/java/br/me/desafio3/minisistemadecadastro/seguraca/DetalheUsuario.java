@@ -5,48 +5,43 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class DetalheUsuario implements UserDetails {
 
     private Usuario usuario;
 
     public DetalheUsuario(Usuario usuario) {
-        super();
         this.usuario = usuario;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        return usuario.getSenha();
+        return usuario.getPassword();
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return usuario.getEmailUsuario();
+        return usuario.getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
@@ -55,9 +50,8 @@ public class DetalheUsuario implements UserDetails {
         return true;
     }
 
-//    public String getEmailUsuario() {
-//        return usuario.getEmailUsuario();
-//    }
-
+    public String getEmail() {
+        return usuario.getEmail();
+    }
 }
 

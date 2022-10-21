@@ -13,6 +13,37 @@
 	color: red;
 }
 </style>
+
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	<title>Cadastro</title>
+<!--</head>-->
+<!--<body class="landing-page">-->
+<!--<div class="login-window">-->
+<!--	<h1 class="ts-32-black ts-black">DESAFIO 3</h1>-->
+
+<!--	<div>-->
+<!--		<h2 class="ts-24-bold ts-black">Login</h2>-->
+<!--		<p class="ts-18-light ts-black">Preecha os campos abaixo para acessar sua conta</p>-->
+<!--	</div>-->
+<!--	<p th:if="${loginError}" class="ts-red ts-20-black">E-mail ou password errados</p>-->
+<!--	<form th:action="@{/home}" method="post">-->
+<!--		<label class="ts-18-medium ts-dark-gray" for="email">E-mail</label>-->
+<!--		<input class="ts-14-medium" type="email" name="email" id="email" placeholder="E-mail">-->
+<!--		<label class="ts-18-medium ts-dark-gray" for="password">password</label>-->
+<!--		<input class="ts-14-medium" type="password" name="password" id="password" placeholder="password">-->
+<!--		<input  class="ts-24-bold ts-white" type="submit" value="Acessar">-->
+<!--	</form>-->
+<!--	<p class="ts-14-light ts-black">Não possui conta? <a href="/cadastro" class="ts-14-medium ts-dark-blue">Crie uma aqui</a></p>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 </head>
 <body>
 <div th:insert="fragments/pagina-nav :: fragmentoNav"> </div>
@@ -21,11 +52,11 @@
 		<div class="row">
 			<div class="col">
 
-<!--				<div class="alert alert-danger alert-dismissible fade show"-->
-<!--					th:if="${param.error}">-->
-<!--					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
-<!--					<span>Senha ou usuário inválido</span>-->
-<!--				</div>-->
+				<div class="alert alert-danger alert-dismissible fade show"
+					th:if="${param.error}">
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+					<span>password ou usuário inválido</span>
+				</div>
 
 				<form th:action="@{/login}" method="post">
 
@@ -37,7 +68,7 @@
 					</div>
 
 					<div class="row mb-3">
-						<label class="col-sm-1 col-form-label">Senha:</label>
+						<label class="col-sm-1 col-form-label">password:</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="password" name="password" id="password" >
 						</div>

@@ -21,8 +21,10 @@ public class LoginSucesso extends SavedRequestAwareAuthenticationSuccessHandler 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
-        String emailUsuario = authentication.getName();
-        Usuario usuario = usuarioRepository.findByEmailUsuario(emailUsuario);
+
+//        String email = authentication.getName();
+//        Usuario usuario = usuarioRepository.findByEmail(email);
+
         String redirectURL = "/usuario/index";
         response.sendRedirect(redirectURL);
     }

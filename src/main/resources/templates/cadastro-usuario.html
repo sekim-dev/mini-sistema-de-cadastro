@@ -22,7 +22,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Email:</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="email" th:field="*{emailUsuario}" required/>
+                        <input class="form-control" type="email" th:field="*{email}" required/>
                     </div>
                     <div class="col-sm-5">
                         <span class="mensagem" th:it="${emailExiste}" th:text="${emailExiste}"></span>
@@ -30,21 +30,21 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label">Senha:</label>
+                    <label class="col-sm-1 col-form-label">password:</label>
                     <div class="col-sm-2">
 
-                        <input class="form-control" type="password" name="senha" autocomplete="off" th:field="*{senha}"
-                               required minlength="4" maxlength="8" onchange='confereSenha()'/>
+                        <input class="form-control" type="password" name="password" autocomplete="off" th:field="*{password}"
+                               required minlength="4" maxlength="8" onchange='conferepassword()'/>
 
                         <div class="col-sm-5">
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label">Confirma Senha:</label>
+                    <label class="col-sm-1 col-form-label">Confirma password:</label>
                     <div class="col-sm-2">
                         <input class="form-control" type="password" name="confirma" autocomplete="off" required
-                               minlength="4" maxlength="8" onchange='confereSenha()'/>
+                               minlength="4" maxlength="8" onchange='conferepassword()'/>
                     </div>
 
                     <div>
@@ -63,14 +63,14 @@
  <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
 
  <script>
-        function confereSenha() {
-            const senha = document.querySelector('input[name=senha]');
+        function conferepassword() {
+            const password = document.querySelector('input[name=password]');
             const confirma = document.querySelector('input[name=confirma]');
 
-            if (confirma.value === senha.value) {
+            if (confirma.value === password.value) {
                 confirma.setCustomValidity('');
             } else {
-                confirma.setCustomValidity('As senhas não conferem')
+                confirma.setCustomValidity('As passwords não conferem')
             }
         }
     </script>

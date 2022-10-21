@@ -1,9 +1,7 @@
 package br.me.desafio3.minisistemadecadastro.services;
 
-import br.me.desafio3.minisistemadecadastro.models.Endereco;
 import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
 import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
-import br.me.desafio3.minisistemadecadastro.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,35 +11,59 @@ import java.util.Optional;
 @Service
 public class FornecedorService {
     @Autowired
-    private FornecedorRepository fornecedorRepo;
+    private FornecedorRepository fornecedorRepository;
 
-    public List<Fornecedor> findAll() {
-        return fornecedorRepo.findAll();
-    }
+//    public List<Fornecedor> findAll() {
+//        return fornecedorRepository.findAll();
+//    }
 
-    public Fornecedor findById(String id) {
-        Optional<Fornecedor> obj = fornecedorRepo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
-    }
 
     public Fornecedor insert(Fornecedor obj) {
-              return fornecedorRepo.insert(obj);
+        return fornecedorRepository.insert(obj);
     }
 
-    public void delete(String id) {
-        findById(id);
-        fornecedorRepo.deleteById(id);
+    public List<Fornecedor> listarFornecedor() {
+        List<Fornecedor> fornecedors = fornecedorRepository.findAll();
+        return fornecedors;
     }
 
-    public Fornecedor update(Fornecedor obj) {
-        Fornecedor newObj = findById(obj.getId());
-        updateData(newObj, obj);
-        return fornecedorRepo.save(newObj);
+//    @Override
+    public void apagarFornecedorPorId(String id) {
+        Fornecedor fornecedor = buscarFornecedorPorId(id);
+        fornecedorRepository.delete(fornecedor);
     }
 
-    private void updateData(Fornecedor newObj, Fornecedor obj) {
-        newObj.setEmailContato(obj.getEmailContato());
+//    @Override
+    public Fornecedor buscarFornecedorPorId(String id) {
+        Optional<Fornecedor> opt = fornecedorRepository.findById(id);
+        if (opt.isPresent()) {
+            return opt.get();
+        } else {
+            throw new IllegalArgumentException("Fornecedor com id : " + id + " não existe");
+        }
     }
+
+
+
+
+////    @Override
+//    public Fornecedor gravarUsuario(Fornecedor fornecedor) {
+//
+//        String senhaCriptografia = criptografia.encode(fornecedor.getPassword());
+//        fornecedor.setPassword(senhaCriptografia);
+//
+//        return fornecedorRepository.save(fornecedor);
+//    }
+
+//    @Override
+    public void alterarFornecedor(Fornecedor fornecedor) {
+        fornecedorRepository.save(fornecedor);
+    }
+
+
+
+
+
 
 
 
