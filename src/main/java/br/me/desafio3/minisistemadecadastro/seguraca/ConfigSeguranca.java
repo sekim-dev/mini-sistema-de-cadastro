@@ -19,90 +19,45 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class ConfigSeguranca extends WebSecurityConfigurerAdapter {
 
-//    @Bean
-//    public DetalheUsuarioServico userDetailsService() {
-//        return new DetalheUsuarioServico();
-//    }
-//
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-//        auth.setUserDetailsService(userDetailsService());
-//        auth.setPasswordEncoder(passwordEncoder());
-//
-//        return auth;
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/fornecedor/novo").authenticated()
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login").permitAll()
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .defaultSuccessUrl("/home", true)
-//                .failureUrl("/home123")
-//                .permitAll()
-//                .and()
-//                .logout().logoutSuccessUrl("/").permitAll();
-//        return http.build();
-//    }
-//}
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new DetalheUsuarioServico();
+    }
 
-
-
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private LoginSucesso loginSucesso;
 
     @Bean
-    public BCryptPasswordEncoder gerarCriptografia() {
-        BCryptPasswordEncoder criptografia = new BCryptPasswordEncoder();
-        return criptografia;
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
     }
 
     @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        DetalheUsuarioServico detalheDoUsuario = new DetalheUsuarioServico(usuarioRepository);
-        return detalheDoUsuario;
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .antMatchers("/fornecedor/novo").permitAll()//.authenticated()
+                .antMatchers("/fornecedor/novo").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/auth/auth-acesso-negado")
-                .and()
-                .formLogin().successHandler(loginSucesso)
-                .loginPage("/login").permitAll()
+                .formLogin()
+                .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/fornecedor/novo")
+                .permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").permitAll();
-
+                .logout().logoutSuccessUrl("/").permitAll();
     }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserDetailsService detalheDoUsuario = userDetailsServiceBean();
-        BCryptPasswordEncoder criptografia = gerarCriptografia();
-        auth.userDetailsService(detalheDoUsuario).passwordEncoder(criptografia);
-    }
-
 
 }

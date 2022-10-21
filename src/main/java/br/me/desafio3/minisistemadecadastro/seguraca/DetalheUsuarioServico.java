@@ -2,6 +2,7 @@ package br.me.desafio3.minisistemadecadastro.seguraca;
 
 import br.me.desafio3.minisistemadecadastro.models.Usuario;
 import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Transactional
 public class DetalheUsuarioServico implements UserDetailsService {
 
+
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public DetalheUsuarioServico(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public DetalheUsuario loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(username);
         if(usuario != null) {
 
@@ -29,5 +29,7 @@ public class DetalheUsuarioServico implements UserDetailsService {
             throw new UsernameNotFoundException("Usuário não encontrado");
         }
     }
+
+
 
 }
