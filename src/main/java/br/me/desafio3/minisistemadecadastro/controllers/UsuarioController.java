@@ -42,7 +42,7 @@ public class UsuarioController {
     @GetMapping("/novo")
     public String adicionarUsuario(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "/cadastro-usuario";
+        return "cadastro-usuario";
     }
 
 
@@ -52,7 +52,7 @@ public class UsuarioController {
         Usuario usr = usuarioService.buscarUsuarioPorEmail(usuario.getEmail());
         if (usr != null) {
             model.addAttribute("emailExiste", "Email já existe cadastrado");
-            return "/cadastro-usuario";
+            return "cadastro-usuario";
         }
 //        String passwordCriptografia = criptografia.encode(usuario.getPassword());
 //        usuario.setPassword(passwordCriptografia);
@@ -67,7 +67,7 @@ public class UsuarioController {
     public String listarUsuario(Model model) {
         List<Usuario> lista = usuarioService.listarUsuario();
         model.addAttribute("usuarios", lista);
-        return "/auth/admin/admin-listar-usuario";
+        return "auth/admin/admin-listar-usuario";
     }
 
     @GetMapping("/admin/apagar/{id}")
