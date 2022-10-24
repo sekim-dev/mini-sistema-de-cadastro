@@ -28,7 +28,7 @@ public class FornecedorController {
     @GetMapping("/fornecedor/novo")
     public String adicionarFornecedor(Model model) {
         model.addAttribute("fornecedor", new Fornecedor());
-        return "/cadastro-fornecedor";
+        return "cadastro-fornecedor";
     }
 
     @PostMapping("/fornecedor/salvar")
@@ -63,10 +63,6 @@ public ModelAndView showUpdateForm(@PathVariable("id") String id) {
     return mav;
 
 
-//    public String editarFornecedor(@PathVariable("id") String id, Model model, Fornecedor fornecedor) {
-//        fornecedorService.alterarFornecedor(fornecedor);
-//        return "redirect:/fornecedor/listar";
-//    }
 
 
     }
