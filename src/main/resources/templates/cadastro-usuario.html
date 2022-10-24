@@ -8,12 +8,13 @@
     <style></style>
 </head>
 <body>
- <div th:insert="fragments/pagina-nav :: fragmentoNav"> </div>
+<div th:insert="fragments/pagina-nav :: fragmentoNav"></div><br><br>
 <div class="container">
     <div class="row">
         <div class="col">
             <h2>Cadastro de usuários</h2>
             <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <span th:text="${mensagem}"></span>
             </div>
 
@@ -49,7 +50,7 @@
 
                     <div>
                         <br>
-                        <input class="btn btn-primary" type="submit" value="Gravar"/>
+                        <input class="btn btn-primary" type="submit" th:href="@{/login}" value="Gravar"/>
                         <a class="btn btn-primary" th:href="@{/}"> Voltar </a>
                     </div>
                 </div>

@@ -92,5 +92,16 @@ public class Endereco {
         this.estado = estado;
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "/" + cep +
+                "/" + logradouro +
+                "/" + numero +
+                "/" + complemento +
+                "/" + bairro +
+                "/" + cidade +
+                "/" + estado
+                ;
+    }
 }

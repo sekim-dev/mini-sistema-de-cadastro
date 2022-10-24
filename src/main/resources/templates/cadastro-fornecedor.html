@@ -8,12 +8,13 @@
     <style></style>
 </head>
 <body>
-<div th:insert="fragments/pagina-nav :: fragmentoNav"></div>
+<div th:insert="fragments/pagina-nav1 :: fragmentoNav1"></div><br><br>
 <div class="container">
     <div class="row">
         <div class="col">
             <h2>Cadastro de fornecedor</h2>
             <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <span th:text="${mensagem}"></span>
             </div>
 
@@ -78,7 +79,7 @@
                 </div>
 
                 <div>
-                    <input class="ts-14-medium phone-input" maxlength="12" id="first-number" type="text"
+                    <input class="ts-14-medium phone-input" maxlength="13" id="first-number" type="text"
                            th:field="*{telefoneLista}" placeholder="(00) 00000-0000"/>
                 </div>
 
@@ -88,20 +89,7 @@
 
 
                 <table class="field col-lg-6">
-                    <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
 
-                <br>
 
                 <fieldset>
                     <h3>Endereço</h3>
@@ -177,10 +165,15 @@
                         <div class="col-sm-5">
                         </div>
 
+
                     </div>
                 </fieldset>
 
-                <div class="row mb-3">
+                    <input th:field="*{id}" type="hidden" class="form-control d-inline-block" id="id" placeholder="" value="">
+                    <label class=" ts-18-medium ts-dark-gray mb-3">Tipo de fornecedor:</label>
+
+
+                    <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Descrição:</label>
                     <div class="col-sm-5">
                         <input class="form-control" type="text" th:field="*{descricao}" required/>
@@ -208,8 +201,6 @@
 
 $(document).ready(function() {
 
-
-
       $("#cep").mask('00000-000', {reverse: true});
       $("#first-number").mask('00 00000-0000', {reverse: true});
 
@@ -223,11 +214,13 @@ $(document).ready(function() {
     function createInputNumber(name) {
         const newInput = document.createElement('input');
         newInput.className = 'ts-14-medium phone-input';
+        newInput.maxlength ='13';
+        newInput.mask = '00 00000-0000', {reverse: true};
         newInput.placeholder = '(00) 00000-0000';
         newInput.type = 'text';
-
         newInput.id = 'first-number';
-        newInput.maxlength = "12";
+        newInput.m
+
         newInput.name = name;
         return newInput;
     }
@@ -279,32 +272,6 @@ $(document).ready(function() {
         });
 
     }
-
-
-<!--    $("#documento").keydown(function(){-->
-<!--    try {-->
-<!--    	$("#documento").unmask();-->
-<!--    } catch (e) {}-->
-
-<!--    var tamanho = $("#documento").val().length;-->
-
-<!--    if(tamanho < 11){-->
-<!--        $("#documento").mask("999.999.999-99");-->
-<!--    } else if(tamanho >= 11){-->
-<!--        $("#documento").mask("99.999.999/9999-99");-->
-<!--    }-->
-
-<!--    // ajustando foco-->
-<!--    var elem = this;-->
-<!--    setTimeout(function(){-->
-<!--    	// mudo a posição do seletor-->
-<!--    	elem.selectionStart = elem.selectionEnd = 10000;-->
-<!--    }, 0);-->
-<!--    // reaplico o valor para mudar o foco-->
-<!--    var currentValue = $(this).val();-->
-<!--    $(this).val('');-->
-<!--    $(this).val(currentValue);-->
-<!--});-->
 
 
 

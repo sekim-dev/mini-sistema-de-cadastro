@@ -23,7 +23,6 @@ public class LoginSucesso extends SavedRequestAwareAuthenticationSuccessHandler 
                                         Authentication authentication) throws ServletException, IOException {
 
 //        String email = authentication.getName();
-//        Usuario usuario = usuarioRepository.findByEmail(email);
 
         String redirectURL = "/usuario/index";
         response.sendRedirect(redirectURL);

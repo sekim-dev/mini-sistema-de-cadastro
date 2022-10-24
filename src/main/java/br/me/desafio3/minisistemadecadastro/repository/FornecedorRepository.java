@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FornecedorRepository extends MongoRepository<Fornecedor,String> {
-    Optional<Fornecedor> findById (String id);
+
 }

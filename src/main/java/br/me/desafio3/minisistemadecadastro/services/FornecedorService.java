@@ -5,6 +5,7 @@ import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,27 +14,46 @@ public class FornecedorService {
     @Autowired
     private FornecedorRepository fornecedorRepository;
 
-//    public List<Fornecedor> findAll() {
-//        return fornecedorRepository.findAll();
-//    }
+    public List<Fornecedor> findAll() {
+        return fornecedorRepository.findAll();
+    }
 
 
     public Fornecedor insert(Fornecedor obj) {
-        return fornecedorRepository.insert(obj);
+
+        Fornecedor newFornecedor = new Fornecedor(
+                obj.getNomeFornecedor(),
+                obj.getNomeContato(),
+                obj.getEmailContato(),
+                obj.getCnpjCpf(),
+                obj.getNumeroDocumento(),
+                obj.getTelefoneLista(),
+                obj.getEndereco(),
+                obj.getDescricao()
+        );
+        if (obj.getId().isEmpty()) {
+            return fornecedorRepository.save(newFornecedor);
+        }
+        newFornecedor.setId(obj.getId());
+        return fornecedorRepository.save(newFornecedor);
     }
 
     public List<Fornecedor> listarFornecedor() {
-        List<Fornecedor> fornecedors = fornecedorRepository.findAll();
-        return fornecedors;
+        List<Fornecedor> fornecedores = fornecedorRepository.findAll();
+        return fornecedores;
     }
 
-//    @Override
+
+    public Fornecedor findById(String id) {
+        return fornecedorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid provider Id:" + id));
+    }
+
     public void apagarFornecedorPorId(String id) {
         Fornecedor fornecedor = buscarFornecedorPorId(id);
         fornecedorRepository.delete(fornecedor);
     }
 
-//    @Override
     public Fornecedor buscarFornecedorPorId(String id) {
         Optional<Fornecedor> opt = fornecedorRepository.findById(id);
         if (opt.isPresent()) {

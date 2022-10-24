@@ -15,13 +15,24 @@ public class Fornecedor {
     private String nomeFornecedor;
     private String nomeContato;
     private String emailContato;
-
     private String cnpjCpf;
     private String numeroDocumento;
     private List<String> telefoneLista = new ArrayList<>();
     private Endereco endereco;
 private String descricao;
     public Fornecedor() {
+    }
+
+    public Fornecedor(String nomeFornecedor, String nomeContato, String emailContato, String cnpjCpf, String numeroDocumento, List<String> telefoneLista, Endereco endereco, String descricao) {
+
+        this.nomeFornecedor = nomeFornecedor;
+        this.nomeContato = nomeContato;
+        this.emailContato =emailContato;
+        this.cnpjCpf = cnpjCpf;
+        this.numeroDocumento = numeroDocumento;
+        this.telefoneLista = telefoneLista;
+        this.endereco = endereco;
+        this.descricao = descricao;
     }
 
     public Fornecedor(String id, String nomeFornecedor, String nomeContato, String emailContato, String cnpjCpf, String numeroDocumento, List<String> telefoneLista, Endereco endereco, String descricao) {
@@ -109,5 +120,17 @@ private String descricao;
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+
+
+    @Override
+    public String toString() {
+        String test = new String();
+
+        for (String i : telefoneLista) {
+            test += getTelefoneLista() + " ; ";
+        }
+        return test;
     }
 }

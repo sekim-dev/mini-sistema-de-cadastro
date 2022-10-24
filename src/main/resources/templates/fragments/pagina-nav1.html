@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<nav th:fragment="fragmentoNav" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="fragmentoNav1" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid col-11 m-auto">
 
         <a class="navbar-brand" href="#">Sistema de Cadastro</a>
@@ -21,16 +21,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
 
-                <li class="nav-item active">
-                    <!--                <a class="btn btn-primary" th:href="@{/home}"> Voltar </a>-->
-                    <a class="nav-link" href="/">Home </a>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/fornecedor/novo}"> Novo fornecedor </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/login}"> Entrar </a>
+                    <a class="nav-link" th:href="@{/fornecedor/listar}"> Listar Fornecedor </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/usuario/novo}"> Novo usuario </a>
-                </li>
+
+                <form th:action="@{/logout}" method="post" class="user-logout">
+                    <input class="btn btn-outline-danger" type="submit" value="Logout"/>
+                </form>
+
+
 
 
             </ul>
