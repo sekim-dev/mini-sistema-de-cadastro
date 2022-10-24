@@ -67,7 +67,7 @@ public class UsuarioController {
     public String listarUsuario(Model model) {
         List<Usuario> lista = usuarioService.listarUsuario();
         model.addAttribute("usuarios", lista);
-        return "auth/admin/admin-listar-usuario";
+        return "/auth/admin/admin-listar-usuario";
     }
 
     @GetMapping("/admin/apagar/{id}")
