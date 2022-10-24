@@ -6,7 +6,6 @@ import br.me.desafio3.minisistemadecadastro.services.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +42,7 @@ public class FornecedorController {
     public String listarFornecedor(Model model) {
         List<Fornecedor> lista = fornecedorService.listarFornecedor();
         model.addAttribute("fornecedores", lista);
-        return "/auth/admin-listar-fornecedor";
+        return "admin-listar-fornecedor";
     }
 
     @GetMapping("/fornecedor/fornecedor/apagar/{id}")
@@ -51,8 +50,6 @@ public class FornecedorController {
         fornecedorService.apagarFornecedorPorId(id);
         return "redirect:/fornecedor/listar";
     }
-
-
 
 
     @GetMapping("/fornecedor/editar/{id}")

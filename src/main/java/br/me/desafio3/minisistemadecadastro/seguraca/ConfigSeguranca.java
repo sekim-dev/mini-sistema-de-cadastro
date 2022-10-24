@@ -34,10 +34,6 @@ public class ConfigSeguranca {
         return authProvider;
     }
 
-//    @Bean
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
 
     @Bean
     protected DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
