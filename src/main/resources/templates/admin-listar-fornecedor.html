@@ -29,14 +29,15 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Nome</th>
-                    <th>CPF/CNPJ</th>
-                    <th>Contato</th>
-                    <th>E-mail</th>
-                    <th> Documento</th>
-                    <th>Telefone(s)</th>
-                    <th>Endereço</th>
+                    <th>  id</th>
+                    <th>  Nome</th>
+                    <th>  CPF/CNPJ</th>
+                    <th>  Documento</th>
+                    <th>  Contato</th>
+                    <th>  E-mail</th>
+                    <th>  Telefone(s)</th>
+                    <th>  Endereço</th>
+                    <th>  Descrição</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -56,11 +57,12 @@
                     <td><span th:text="${fornecedor.id}"> Id </span></td>
                     <td><span th:text="${fornecedor.nomeFornecedor}"> Nome Fornecedor </span></td>
                     <td><span th:text="${fornecedor.cnpjCpf}"> cnpjCpf </span></td>
+                    <td><span th:text="${fornecedor.numeroDocumento}"> Documento </span></td>
                     <td><span th:text="${fornecedor.nomeContato}"> Nome Contato </span></td>
                     <td><span th:text="${fornecedor.emailContato}"> E-mail </span></td>
-                    <td><span th:text="${fornecedor.numeroDocumento}"> Documento </span></td>
                     <td th:text="${fornecedor.telefoneLista}"/>
                     <td th:text="${fornecedor.endereco.toString()}"/>
+                    <td><span th:text="${fornecedor.descricao}"> Descricao </span></td>
 
                     <td>
                         <a class="btn btn-outline-danger btn-sm"

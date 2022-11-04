@@ -3,7 +3,6 @@ package br.me.desafio3.minisistemadecadastro.controllers;
 import br.me.desafio3.minisistemadecadastro.models.Usuario;
 import br.me.desafio3.minisistemadecadastro.repository.UsuarioRepository;
 import br.me.desafio3.minisistemadecadastro.services.UsuarioService;
-import br.me.desafio3.minisistemadecadastro.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,12 +53,10 @@ public class UsuarioController {
             model.addAttribute("emailExiste", "Email já existe cadastrado");
             return "cadastro-usuario";
         }
-//        String passwordCriptografia = criptografia.encode(usuario.getPassword());
-//        usuario.setPassword(passwordCriptografia);
 
         usuarioService.gravarUsuario(usuario);
         attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
-        return "redirect:/usuario/novo";
+        return "redirect:/login";
 
     }
 

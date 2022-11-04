@@ -1,337 +1,337 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
-
-  <link rel="stylesheet" th:href="@{/bootstrap-5.2.2-dist/css/bootstrap.min.css}">
-  <script th:src="@{/jquery-3.6.1.min/jquery-3.6.1.min.js}"></script>
-  <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>
-
-
-
-  <style>
-    .mensagem {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-<div th:insert="fragments/pagina-nav :: fragmentoNav"></div><br><br>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2>Alterar fornecedor</h2>
-      <form th:action="@{/fornecedor/editar/{id}(id=${fornecedor.id})}" th:object="${fornecedores}" method="post">
-
-        <div class="row mb-3">
-          <label class="col-sm-1 col-form-label">Nome:</label>
-          <div class="col-sm-5">
-            <input class="form-control" type="text" th:field="*{nomeFornecedor}" required/>
-          </div>
-          <div class="col-sm-5">
-          </div>
-
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-1 col-form-label">Nome do Contato:</label>
-          <div class="col-sm-2">
-            <input class="form-control" type="text" th:field="*{nomeContato}"
-                   required minlength="4" maxlength="8"/>
-          </div>
-          <div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-1 col-form-label">Email:</label>
-          <div class="col-sm-5">
-            <input class="form-control" type="email" th:field="*{emailContato}" required/>
-          </div>
-          <div class="col-sm-5">
-          </div>
-
-        </div>
-
-        <div class="row">
-          <div class="field col-lg-6">
-            <label class="col-sm-5 col-form-label">Tipo do documento</label>
-            <div class="provider-type ts-18-medium ts-dark-gray">
-              <input type="radio" id="cnpj" th:field="*{cnpjCpf}" value="cnpj">
-              <label>CNPJ</label><br>
-              <input type="radio" id="cpf" th:field="*{cnpjCpf}" value="cpf">
-              <label>CPF</label>
-
-            </div>
-          </div>
-        </div>
-
-
-        <div class="row mb-3">
-          <label class="col-sm-1 col-form-label">Numero do Documento:</label>
-          <div class="col-sm-5">
-            <input class="form-control" type="text" id="documento" th:field="*{numeroDocumento}" required/>
-          </div>
-          <div class="col-sm-5">
-          </div>
-
-        </div>
-
-        <div>
-          <input class="ts-14-medium phone-input" maxlength="12" id="first-number" type="text"
-                 th:field="*{telefoneLista}" placeholder="(00) 00000-0000"/>
-        </div>
-
-        <button class="btn-phone ts-18-medium ts-white" id="add-number" type="button">
-          Adicionar telefone
-        </button>
-
-        <br>
-
-        <fieldset>
-          <h3>Endereço</h3>
-
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Cep:</label>
-            <div class="col-sm-5">
-              <input class="form-control" id="cep" type="text" maxlength="9" th:field="*{endereco.cep}" required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Logradouro:</label>
-            <div class="col-sm-5">
-              <input class="form-control" id="logradouro" name="logradouro" type="text" th:field="*{endereco.logradouro}"
-                     required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Numero:</label>
-            <div class="col-sm-5">
-              <input class="form-control" type="text" th:field="*{endereco.numero}" required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Complemento:</label>
-            <div class="col-sm-5">
-              <input class="form-control"  type="text" th:field="*{endereco.complemento}"
-                     required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Bairro:</label>
-            <div class="col-sm-5">
-              <input class="form-control" name="bairro" id="bairro" type="text" th:field="*{endereco.bairro}" required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Cidade:</label>
-            <div class="col-sm-5">
-              <input class="form-control" name="cidade" id="cidade" type="text" th:field="*{endereco.cidade}" required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-
-          <div class="row mb-3">
-            <label class="col-sm-1 col-form-label">Estado:</label>
-            <div class="col-sm-5">
-              <input class="form-control" name="estado" id="estado" type="text" th:field="*{endereco.estado}"  required/>
-            </div>
-            <div class="col-sm-5">
-            </div>
-
-          </div>
-        </fieldset>
-
-        <div class="row mb-3">
-          <label class="col-sm-1 col-form-label">Descrição:</label>
-          <div class="col-sm-5">
-            <input class="form-control" type="text" th:field="*{descricao}" required/>
-          </div>
-          <div class="col-sm-5">
-          </div>
-
-        </div>
-
-        <div>
-          <input class="btn btn-primary" type="submit" value="Gravar"/>
-          <a class="btn btn-primary" th:href="@{/}"> Voltar </a>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-
-<script>
-
-  $(document).ready(function() {
-
-
-
-    $("#cep").mask('00000-000', {reverse: true});
-    $("#first-number").mask('00 00000-0000', {reverse: true});
-
-    addNumberField()
-    radioChange()
-
-    function getParent(inputNode) {
-      return inputNode.parentElement;
-    }
-
-    function createInputNumber(name) {
-      const newInput = document.createElement('input');
-      newInput.className = 'ts-14-medium phone-input';
-      newInput.placeholder = '(00) 00000-0000';
-      newInput.type = 'text';
-
-      newInput.id = 'first-number';
-      newInput.maxlength = "12";
-      newInput.name = name;
-      return newInput;
-    }
-
-    function addInputHelper(node, input) {
-      getParent(node).appendChild(input);
-    }
-
-    function readNumberFromLastInput(firstInputNode) {
-      const parent = getParent(firstInputNode);
-      const lastChild = parent.lastElementChild;
-      const getNumber = lastChild.name.match(/\[(.*)\]/i);
-      if (!getNumber) {
-        return [lastChild.name, -1];
-      }
-      const getName = lastChild.name.match(/(.*)\[.*/i);
-      return [getName[1], getNumber[1]];
-    }
-
-    function addNumberField() {
-      const btnAddNumber = document.getElementById('add-number');
-      const inputNumber = document.getElementById('first-number');
-      btnAddNumber.addEventListener('click', () => {
-        const result = readNumberFromLastInput(inputNumber);
-        if (result[1] === -1) {
-          inputNumber.name = result[0] + "[0]";
-          const newInputNode = createInputNumber(result[0] + "[1]");
-          addInputHelper(inputNumber, newInputNode);
-          return;
-        }
-        const newNumber = (parseInt(result[1]) + 1);
-        const newInputNode = createInputNumber(result[0] + "[" + newNumber + "]");
-        addInputHelper(inputNumber, newInputNode);
-      });
-    }
-
-    function radioChange() {
-      const radioCnpj = document.getElementById('cnpj');
-      const radioCpf = document.getElementById('cpf');
-      const documento = document.getElementById('documento');
-      radioCnpj.addEventListener('change', () =>{
-        documento.placeholder = '00.000.000/0000-00'
-        $("#documento").mask("99.999.999/9999-99");
-
-      });
-      radioCpf.addEventListener('change', () => {
-        documento.placeholder = '000.000.000-00';
-        $("#documento").mask("999.999.999-99");
-      });
-
-    }
-
-
-
-
-    function clean_address_form() {
-      // Clean Address form.
-      $("#logradouro").val("");
-      $("#bairro").val("");
-      $("#cidade").val("");
-      $("#estado").val("");
-    }
-
-    //When Cep field loses focus.
-    $("#cep").blur(function() {
-
-      //Create "cep" variable with digits only.
-      var cep = $(this).val().replace(/\D/g, '');
-
-      //Checks if a cep was informed.
-      if (cep != "") {
-
-        //Validate cep.
-        var validacep = /^[0-9]{8}$/;
-
-        //Validate cep format
-        if(validacep.test(cep)) {
-
-          //Fill in the fields with "..." while querying webservice.
-          $("#logradouro").val("...");
-          $("#bairro").val("...");
-          $("#cidade").val("...");
-          $("#estado").val("...");
-
-          //Search the informed cep in viacep.com.br/
-          $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(data) {
-
-            if (!("erro" in data)) {
-              //Update fields with returned data.
-              $("#logradouro").val(data.logradouro);
-              $("#bairro").val(data.bairro);
-              $("#cidade").val(data.localidade);
-              $("#estado").val(data.uf);
-            } //end if.
-            else {
-              //searched cep was not found.
-              clean_address_form();
-              alert("CEP não encontrado.");
-            }
-          });
-        } //end if.
-        else {
-          //Invalid cep.
-          clean_address_form();
-          alert("Formato de CEP inválido.");
-        }
-      } //end if.
-      else {
-        //cep not informed, clean form.
-        clean_address_form();
-      }
-    });
-  });
-
-
-
-
-
-</script>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Insert title here</title>-->
+
+<!--  <link rel="stylesheet" th:href="@{/bootstrap-5.2.2-dist/css/bootstrap.min.css}">-->
+<!--  <script th:src="@{/jquery-3.6.1.min/jquery-3.6.1.min.js}"></script>-->
+<!--  <script th:src="@{/bootstrap-5.2.2-dist/js/bootstrap.min.js}"></script>-->
+
+
+
+<!--  <style>-->
+<!--    .mensagem {-->
+<!--      color: red;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:insert="fragments/pagina-nav :: fragmentoNav"></div><br><br>-->
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col">-->
+<!--      <h2>Alterar fornecedor</h2>-->
+<!--      <form th:action="@{/fornecedor/editar/{id}(id=${fornecedor.id})}" th:object="${fornecedores}" method="post">-->
+
+<!--        <div class="row mb-3">-->
+<!--          <label class="col-sm-1 col-form-label">Nome:</label>-->
+<!--          <div class="col-sm-5">-->
+<!--            <input class="form-control" type="text" th:field="*{nomeFornecedor}" required/>-->
+<!--          </div>-->
+<!--          <div class="col-sm-5">-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--        <div class="row mb-3">-->
+<!--          <label class="col-sm-1 col-form-label">Nome do Contato:</label>-->
+<!--          <div class="col-sm-2">-->
+<!--            <input class="form-control" type="text" th:field="*{nomeContato}"-->
+<!--                   required minlength="4" maxlength="8"/>-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="row mb-3">-->
+<!--          <label class="col-sm-1 col-form-label">Email:</label>-->
+<!--          <div class="col-sm-5">-->
+<!--            <input class="form-control" type="email" th:field="*{emailContato}" required/>-->
+<!--          </div>-->
+<!--          <div class="col-sm-5">-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--        <div class="row">-->
+<!--          <div class="field col-lg-6">-->
+<!--            <label class="col-sm-5 col-form-label">Tipo do documento</label>-->
+<!--            <div class="provider-type ts-18-medium ts-dark-gray">-->
+<!--              <input type="radio" id="cnpj" th:field="*{cnpjCpf}" value="cnpj">-->
+<!--              <label>CNPJ</label><br>-->
+<!--              <input type="radio" id="cpf" th:field="*{cnpjCpf}" value="cpf">-->
+<!--              <label>CPF</label>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+<!--        <div class="row mb-3">-->
+<!--          <label class="col-sm-1 col-form-label">Numero do Documento:</label>-->
+<!--          <div class="col-sm-5">-->
+<!--            <input class="form-control" type="text" id="documento" th:field="*{numeroDocumento}" required/>-->
+<!--          </div>-->
+<!--          <div class="col-sm-5">-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--        <div>-->
+<!--          <input class="ts-14-medium phone-input" maxlength="12" id="first-number" type="text"-->
+<!--                 th:field="*{telefoneLista}" placeholder="(00) 00000-0000"/>-->
+<!--        </div>-->
+
+<!--        <button class="btn-phone ts-18-medium ts-white" id="add-number" type="button">-->
+<!--          Adicionar telefone-->
+<!--        </button>-->
+
+<!--        <br>-->
+
+<!--        <fieldset>-->
+<!--          <h3>Endereço</h3>-->
+
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Cep:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control" id="cep" type="text" maxlength="9" th:field="*{endereco.cep}" required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Logradouro:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control" id="logradouro" name="logradouro" type="text" th:field="*{endereco.logradouro}"-->
+<!--                     required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Numero:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control" type="text" th:field="*{endereco.numero}" required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Complemento:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control"  type="text" th:field="*{endereco.complemento}"-->
+<!--                     required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Bairro:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control" name="bairro" id="bairro" type="text" th:field="*{endereco.bairro}" required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Cidade:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control" name="cidade" id="cidade" type="text" th:field="*{endereco.cidade}" required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row mb-3">-->
+<!--            <label class="col-sm-1 col-form-label">Estado:</label>-->
+<!--            <div class="col-sm-5">-->
+<!--              <input class="form-control" name="estado" id="estado" type="text" th:field="*{endereco.estado}"  required/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5">-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </fieldset>-->
+
+<!--        <div class="row mb-3">-->
+<!--          <label class="col-sm-1 col-form-label">Descrição:</label>-->
+<!--          <div class="col-sm-5">-->
+<!--            <input class="form-control" type="text" th:field="*{descricao}" required/>-->
+<!--          </div>-->
+<!--          <div class="col-sm-5">-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--        <div>-->
+<!--          <input class="btn btn-primary" type="submit" value="Gravar"/>-->
+<!--          <a class="btn btn-primary" th:href="@{/}"> Voltar </a>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>-->
+
+<!--<script>-->
+
+<!--  $(document).ready(function() {-->
+
+
+
+<!--    $("#cep").mask('00000-000', {reverse: true});-->
+<!--    $("#first-number").mask('00 00000-0000', {reverse: true});-->
+
+<!--    addNumberField()-->
+<!--    radioChange()-->
+
+<!--    function getParent(inputNode) {-->
+<!--      return inputNode.parentElement;-->
+<!--    }-->
+
+<!--    function createInputNumber(name) {-->
+<!--      const newInput = document.createElement('input');-->
+<!--      newInput.className = 'ts-14-medium phone-input';-->
+<!--      newInput.placeholder = '(00) 00000-0000';-->
+<!--      newInput.type = 'text';-->
+
+<!--      newInput.id = 'first-number';-->
+<!--      newInput.maxlength = "12";-->
+<!--      newInput.name = name;-->
+<!--      return newInput;-->
+<!--    }-->
+
+<!--    function addInputHelper(node, input) {-->
+<!--      getParent(node).appendChild(input);-->
+<!--    }-->
+
+<!--    function readNumberFromLastInput(firstInputNode) {-->
+<!--      const parent = getParent(firstInputNode);-->
+<!--      const lastChild = parent.lastElementChild;-->
+<!--      const getNumber = lastChild.name.match(/\[(.*)\]/i);-->
+<!--      if (!getNumber) {-->
+<!--        return [lastChild.name, -1];-->
+<!--      }-->
+<!--      const getName = lastChild.name.match(/(.*)\[.*/i);-->
+<!--      return [getName[1], getNumber[1]];-->
+<!--    }-->
+
+<!--    function addNumberField() {-->
+<!--      const btnAddNumber = document.getElementById('add-number');-->
+<!--      const inputNumber = document.getElementById('first-number');-->
+<!--      btnAddNumber.addEventListener('click', () => {-->
+<!--        const result = readNumberFromLastInput(inputNumber);-->
+<!--        if (result[1] === -1) {-->
+<!--          inputNumber.name = result[0] + "[0]";-->
+<!--          const newInputNode = createInputNumber(result[0] + "[1]");-->
+<!--          addInputHelper(inputNumber, newInputNode);-->
+<!--          return;-->
+<!--        }-->
+<!--        const newNumber = (parseInt(result[1]) + 1);-->
+<!--        const newInputNode = createInputNumber(result[0] + "[" + newNumber + "]");-->
+<!--        addInputHelper(inputNumber, newInputNode);-->
+<!--      });-->
+<!--    }-->
+
+<!--    function radioChange() {-->
+<!--      const radioCnpj = document.getElementById('cnpj');-->
+<!--      const radioCpf = document.getElementById('cpf');-->
+<!--      const documento = document.getElementById('documento');-->
+<!--      radioCnpj.addEventListener('change', () =>{-->
+<!--        documento.placeholder = '00.000.000/0000-00'-->
+<!--        $("#documento").mask("99.999.999/9999-99");-->
+
+<!--      });-->
+<!--      radioCpf.addEventListener('change', () => {-->
+<!--        documento.placeholder = '000.000.000-00';-->
+<!--        $("#documento").mask("999.999.999-99");-->
+<!--      });-->
+
+<!--    }-->
+
+
+
+
+<!--    function clean_address_form() {-->
+<!--      // Clean Address form.-->
+<!--      $("#logradouro").val("");-->
+<!--      $("#bairro").val("");-->
+<!--      $("#cidade").val("");-->
+<!--      $("#estado").val("");-->
+<!--    }-->
+
+<!--    //When Cep field loses focus.-->
+<!--    $("#cep").blur(function() {-->
+
+<!--      //Create "cep" variable with digits only.-->
+<!--      var cep = $(this).val().replace(/\D/g, '');-->
+
+<!--      //Checks if a cep was informed.-->
+<!--      if (cep != "") {-->
+
+<!--        //Validate cep.-->
+<!--        var validacep = /^[0-9]{8}$/;-->
+
+<!--        //Validate cep format-->
+<!--        if(validacep.test(cep)) {-->
+
+<!--          //Fill in the fields with "..." while querying webservice.-->
+<!--          $("#logradouro").val("...");-->
+<!--          $("#bairro").val("...");-->
+<!--          $("#cidade").val("...");-->
+<!--          $("#estado").val("...");-->
+
+<!--          //Search the informed cep in viacep.com.br/-->
+<!--          $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(data) {-->
+
+<!--            if (!("erro" in data)) {-->
+<!--              //Update fields with returned data.-->
+<!--              $("#logradouro").val(data.logradouro);-->
+<!--              $("#bairro").val(data.bairro);-->
+<!--              $("#cidade").val(data.localidade);-->
+<!--              $("#estado").val(data.uf);-->
+<!--            } //end if.-->
+<!--            else {-->
+<!--              //searched cep was not found.-->
+<!--              clean_address_form();-->
+<!--              alert("CEP não encontrado.");-->
+<!--            }-->
+<!--          });-->
+<!--        } //end if.-->
+<!--        else {-->
+<!--          //Invalid cep.-->
+<!--          clean_address_form();-->
+<!--          alert("Formato de CEP inválido.");-->
+<!--        }-->
+<!--      } //end if.-->
+<!--      else {-->
+<!--        //cep not informed, clean form.-->
+<!--        clean_address_form();-->
+<!--      }-->
+<!--    });-->
+<!--  });-->
+
+
+
+
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
