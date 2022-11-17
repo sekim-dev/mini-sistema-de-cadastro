@@ -158,8 +158,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-1 col-form-label">Cidade:</label>
                             <div class="col-sm-5">
-                                <input class="form-control" name="cidade" id="cidade" type="text"
-                                       th:field="*{endereco.cidade}" required/>
+                                <input class="form-control" name="localidade" id="localidade" type="text"
+                                       th:field="*{endereco.localidade}" required/>
                             </div>
                             <div class="col-sm-5">
                             </div>
@@ -169,8 +169,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-1 col-form-label">Estado:</label>
                             <div class="col-sm-5">
-                                <input class="form-control" name="estado" id="estado" type="text"
-                                       th:field="*{endereco.estado}" required/>
+                                <input class="form-control" name="uf" id="uf" type="text"
+                                       th:field="*{endereco.uf}" required/>
                             </div>
                             <div class="col-sm-5">
                             </div>
@@ -327,39 +327,34 @@
                 //Validate cep format
                 if (validacep.test(cep)) {
 
-                    //Fill in the fields with "..." while querying webservice.
-                    $("#logradouro").val("...");
-                    $("#bairro").val("...");
-                    $("#cidade").val("...");
-                    $("#estado").val("...");
-
-                    //Search the informed cep in viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (data) {
-
-                        if (!("erro" in data)) {
-                            //Update fields with returned data.
-                            $("#logradouro").val(data.logradouro);
-                            $("#bairro").val(data.bairro);
-                            $("#cidade").val(data.localidade);
-                            $("#estado").val(data.uf);
-                        } //end if.
-                        else {
-                            //searched cep was not found.
-                            clean_address_form();
-                            alert("CEP não encontrado.");
-                        }
-                    });
-                } //end if.
-                else {
-                    //Invalid cep.
+                    if (cep) {
+                        $.ajax({
+                            url: "/consulta/" + cep,
+                            type: "get",
+                            dataType: "json",
+                            success: [function (dados) {
+                                if (!("erro" in dados)) {
+                                    $("#logradouro").val(dados.logradouro);
+                                    $("#bairro").val(dados.bairro);
+                                    $("#localidade").val(dados.localidade);
+                                    $("#uf").val(dados.uf);
+                                } else {
+                                    //searched cep was not found.
+                                    clean_address_form();
+                                    alert("CEP não encontrado.");
+                                }
+                            }],
+                        });
+                    } else {
+                        clean_address_form();
+                        alert("Formato de CEP inválido.");
+                    }
+                } else {
+                    //cep not informed, clean form.
                     clean_address_form();
-                    alert("Formato de CEP inválido.");
                 }
-            } //end if.
-            else {
-                //cep not informed, clean form.
-                clean_address_form();
             }
+
         });
     });
 

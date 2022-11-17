@@ -1,15 +1,15 @@
 package br.me.desafio3.minisistemadecadastro.controllers;
 
+import br.me.desafio3.minisistemadecadastro.models.Endereco;
 import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
 import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
 import br.me.desafio3.minisistemadecadastro.services.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -53,14 +53,18 @@ public class FornecedorController {
 
 
     @GetMapping("/fornecedor/editar/{id}")
-public ModelAndView showUpdateForm(@PathVariable("id") String id) {
-    ModelAndView mav = new ModelAndView("cadastro-fornecedor");
-    Fornecedor provider = fornecedorService.findById(id);
-    mav.addObject("fornecedor", provider);
-    return mav;
+    public ModelAndView showUpdateForm(@PathVariable("id") String id) {
+        ModelAndView mav = new ModelAndView("cadastro-fornecedor");
+        Fornecedor fornecedor = fornecedorService.findById(id);
+        mav.addObject("fornecedor", fornecedor);
+        return mav;
+    }
 
-
-
+    @ResponseBody
+    @GetMapping(value = "/consulta/{cep}")
+    public ResponseEntity<Endereco> consultaCep(@PathVariable("cep") String cep) {
+        Endereco endereco = fornecedorService.consultaCep(cep);
+        return new ResponseEntity<Endereco>(endereco, HttpStatus.OK);
 
     }
 }

@@ -1,9 +1,11 @@
 package br.me.desafio3.minisistemadecadastro.services;
 
+import br.me.desafio3.minisistemadecadastro.models.Endereco;
 import br.me.desafio3.minisistemadecadastro.models.Fornecedor;
 import br.me.desafio3.minisistemadecadastro.repository.FornecedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,19 +65,11 @@ public class FornecedorService {
         }
     }
 
+public Endereco consultaCep(String cep){
+        return new RestTemplate().getForEntity("https://viacep.com.br/ws/" + cep + "/json/", Endereco.class).getBody();
 
+}
 
-
-////    @Override
-//    public Fornecedor gravarUsuario(Fornecedor fornecedor) {
-//
-//        String senhaCriptografia = criptografia.encode(fornecedor.getPassword());
-//        fornecedor.setPassword(senhaCriptografia);
-//
-//        return fornecedorRepository.save(fornecedor);
-//    }
-
-//    @Override
     public void alterarFornecedor(Fornecedor fornecedor) {
         fornecedorRepository.save(fornecedor);
     }
